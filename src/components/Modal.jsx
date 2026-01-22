@@ -1,17 +1,17 @@
 export default function Modal({ setModalOpen, children, title }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-[#1d1d1de8] w-fit p-12 rounded-3xl shadow-4xl relative">
+      <div className="bg-[#1d1d1de8] w-fit  rounded-3xl shadow-4xl relative overflow-hidden ">
         <button
           onClick={() => setModalOpen(false)}
           className="absolute top-6 right-6 text-stone-400 hover:text-white"
         >
           <XmarkCircle className="w-8 h-8 fill-white hover:fill-red-500 hover:scale-110 transition-all duration-300" />
         </button>
-        <h2 className="text-4xl text-center font-bold text-white mb-6">
-        {title}
-        </h2>
-        {children}
+        <div className="flex p-6 gap-10">
+          {children}
+        </div>
+        
       </div>
     </div>
   );

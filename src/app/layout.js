@@ -1,7 +1,9 @@
 
 import "./globals.css";
 import { Rancho } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
 const rancho = Rancho({ subsets: ["latin"], weight: ["400"] });
+
 
 export const metadata = {
   title: "Create Next App",
@@ -12,8 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={rancho.className}>
-        
+        <AuthProvider>
         {children}
+        </AuthProvider>
 
       </body>
     </html>
