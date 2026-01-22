@@ -1,6 +1,6 @@
+
 import "./globals.css";
 import { Rancho } from "next/font/google";
-import Header from "../components/Header";
 const rancho = Rancho({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata = {
@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
       <body className={rancho.className}>
         
         {children}
+
       </body>
     </html>
   );

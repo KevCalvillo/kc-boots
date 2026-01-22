@@ -1,10 +1,77 @@
-export default function BootCard({bota}){
-  return(
-    <div className="bg-[#e2e2e2a9] shadow-xl  rounded-3xl p-5 flex justify-center items-center flex-col text-xl hover:scale-102 transition-transform duration-300">
-              <img src={bota.imageUrl} className="h-40 w-60 rounded-2xl mb-4" />
-              <h1 className="font-bold">{bota.title}</h1>
-              <strong>$ {bota.price} USD</strong>
-              <button className="bg-[#42763f] text-white hover:bg-[#335331] hover:scale-105  transition-all duration-300 rounded-2xl px-3 py-1 mt-2">Comprar</button>
-            </div>  
-  )
+export default function BootCard({ bota }) {
+  return (
+    <div className="max-w-xs rounded-3xl overflow-hidden shadow-2xl transition-all hover:scale-[1.02] duration-300">
+      <div className="relative bg-gradient-to-br from-stone-400 to-stone-200 flex items-center justify-center p-8">
+        <img
+          src="/bota.png"
+          className="w-full h-60 object-contain transform"
+          alt={bota.title}
+        />
+        <Heart className="absolute top-8 right-8 w-8 h-8 cursor-pointer hover:scale-110 transition-transform z-20" />
+      </div>
+
+      <div className="relative z-10 -mt-6 p-6 flex flex-col gap-2 text-stone-100 bg-[#1d1d1d] rounded-t-3xl">
+        <h1 className="text-2xl font-bold ">{bota.title}</h1>
+
+        <p className="text-sm line-clamp-2">
+          Calidad artesanal y durabilidad premium para cualquier terreno.
+        </p>
+
+        <div className="flex justify-between items-center mt-4">
+          <div className="flex flex-col">
+            <span className="text-xs uppercase font-bold">Precio</span>
+            <span className="text-2xl">${bota.price}</span>
+          </div>
+
+          <button className="bg-[#42763f] text-white p-3 rounded-xl hover:bg-[#335331] transition-colors cursor-pointer shadow-lg shadow-green-900/20 group">
+            <Cart2 className=" group-hover:scale-110 transition-transform" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Heart(props) {
+  return (
+    <svg
+      className={props.className}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      transform="rotate(0 0 0)"
+    >
+      <path
+        d="M11.8227 4.77222C9.5756 2.52515 5.93237 2.52515 3.6853 4.77222C1.43823 7.01929 1.43823 10.6625 3.6853 12.9096L10.409 19.6334C11.2877 20.5121 12.7123 20.5121 13.591 19.6334L20.3147 12.9097C22.5618 10.6626 22.5618 7.01939 20.3147 4.77232C18.0676 2.52525 14.4244 2.52525 12.1773 4.77232L12 4.94959L11.8227 4.77222Z"
+        fill="#42763f"
+      />
+    </svg>
+  );
+}
+
+function Cart2(props) {
+  return (
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 24 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      transform="rotate(0 0 0)"
+    >
+      <path
+        d="M1.56641 4.48242C1.56641 4.06821 1.90219 3.73242 2.31641 3.73242H3.49696C4.61854 3.73242 5.56885 4.55844 5.72504 5.6691L5.7862 6.10403H19.7507C21.3714 6.10403 22.4605 7.76586 21.8137 9.25196L19.1464 15.3803C18.789 16.2014 17.9788 16.7324 17.0833 16.7324L7.72179 16.7324C6.60021 16.7324 5.6499 15.9064 5.49371 14.7957L4.23965 5.87798C4.18759 5.50776 3.87082 5.23242 3.49696 5.23242H2.31641C1.90219 5.23242 1.56641 4.89664 1.56641 4.48242Z"
+        fill="#ffffff"
+      />
+      <g opacity="0.4">
+        <path
+          d="M7.7832 18.2324C6.8167 18.2324 6.0332 19.0159 6.0332 19.9824C6.0332 20.9489 6.8167 21.7324 7.7832 21.7324H7.7932C8.7597 21.7324 9.5432 20.9489 9.5432 19.9824C9.5432 19.0159 8.7597 18.2324 7.7932 18.2324H7.7832Z"
+          fill="#ffffff"
+        />
+        <path
+          d="M16.3203 18.2324C15.3538 18.2324 14.5703 19.0159 14.5703 19.9824C14.5703 20.9489 15.3538 21.7324 16.3203 21.7324H16.3303C17.2968 21.7324 18.0803 20.9489 18.0803 19.9824C18.0803 19.0159 17.2968 18.2324 16.3303 18.2324H16.3203Z"
+          fill="#ffffff"
+        />
+      </g>
+    </svg>
+  );
 }
