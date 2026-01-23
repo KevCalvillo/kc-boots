@@ -3,7 +3,7 @@ import EyeOpen from "../ui/icons/EyeOpen";
 import EyeClosed from "../ui/icons/EyeClosed";
 import Google from "../ui/icons/Google";
 import Swal from "sweetalert2";
-import { calcularNivelPassword } from "@/lib/utils";
+import { calcularNivelPassword } from "@/libs/utils";
 
 export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
   const [passwordMatch, setPasswordMatch] = useState(true);
@@ -103,12 +103,14 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
           name="nombre"
           type="text"
           placeholder="Ingresa tu nombre"
+          required
           className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300"
         />
         <label htmlFor="" className="text-white">
           Email:
         </label>
         <input
+          required
           name="email"
           type="email"
           placeholder="Ingresa tu email"
@@ -121,6 +123,7 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
         <div className="relative w-full">
           <input
             name="password"
+            required
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
             onChange={handleOnChange}
@@ -147,6 +150,7 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
         </label>
         <div className="relative w-full">
           <input
+            required
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
             placeholder="Confirma tu contraseña"
@@ -161,9 +165,9 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
             className="absolute top-1/2 right-3 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
             ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
             )}
           </button>
         </div>

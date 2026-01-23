@@ -4,9 +4,8 @@ import LoginForm from "./Login";
 import RegisterForm from "./Register";
 
 
-export default function Auth({ setModalOpen }) {
-  const [showRegisterForm, setShowRegisterForm] = useState(true);
-
+export default function Auth({ setModalOpen, showRegisterForm, setShowRegisterForm}) {
+  
   return (
     <div className="p-10 pb-0 w-96">
       {showRegisterForm ? (

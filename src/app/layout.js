@@ -3,6 +3,7 @@ import "./globals.css";
 import { Rancho } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
 const rancho = Rancho({ subsets: ["latin"], weight: ["400"] });
+import NavbarLayout from "@/components/NavbarLayout";
 
 
 export const metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={rancho.className}>
         <AuthProvider>
-        {children}
+          <NavbarLayout>
+            {children}
+          </NavbarLayout>
         </AuthProvider>
 
       </body>

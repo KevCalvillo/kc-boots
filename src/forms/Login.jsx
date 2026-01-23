@@ -84,6 +84,7 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
           Email:
         </label>
         <input
+          required
           name="email"
           type="email"
           placeholder="Ingresa tu email"
@@ -95,6 +96,7 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
         </label>
         <div className="relative w-full">
           <input
+            required
             name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
@@ -107,16 +109,16 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
             className="absolute top-1/2 right-3 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
             ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
             )}
           </button>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-green-800 hover:bg-green-900 hover:scale-102 duration-300 text-white font-bold py-2 px-4 mt-4 rounded transition-all "
+          className="w-full bg-green-800 hover:bg-green-900 hover:scale-102 duration-300 text-white font-bold py-2 px-4 mt-4 rounded transition-all cursor-pointer"
         >
           Iniciar Sesion
         </button>

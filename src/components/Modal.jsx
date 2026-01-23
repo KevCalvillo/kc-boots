@@ -4,7 +4,7 @@ export default function Modal({ setModalOpen, children, title }) {
       <div className="bg-[#1d1d1de8] w-fit  rounded-3xl shadow-4xl relative overflow-hidden ">
         <button
           onClick={() => setModalOpen(false)}
-          className="absolute top-6 right-6 text-stone-400 hover:text-white"
+          className="absolute top-6 right-6 text-stone-400 hover:text-white cursor-pointer"
         >
           <XmarkCircle className="w-8 h-8 fill-white hover:fill-red-500 hover:scale-110 transition-all duration-300" />
         </button>
