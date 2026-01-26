@@ -56,19 +56,18 @@ function HomePage() {
       </section>
 
       <section className="relative justify-end min-h-screen w-full flex items-center overflow-hidden bg-black px-10">
-        <div className="absolute inset-0 z-20 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+        <div className="absolute inset-0 z-20 bg-linear-to-b from-black via-black/30 to-transparent"></div>
 
         <div className="absolute left-0 top-0 w-full h-full md:w-3/5 z-10">
           <div className="relative h-full w-full">
-            <div className="absolute inset-0 z-20 bg-gradient-to-l from-black via-black/30 to-transparent"></div>
-
+            <div className="absolute inset-0 z-20 bg-linear-to-l from-black via-black/30 to-transparent"></div>
             <img
               src="/bota2.webp"
               alt="Bota artesanal"
               className="h-full w-full object-cover object-center brightness-130"
             />
 
-            <div className="absolute bottom-0 left-0 w-full h-62 bg-gradient-to-t from-black to-transparent z-20"></div>
+            <div className="absolute bottom-0 left-0 w-full h-62 bg-linear-to-t from-black to-transparent z-20"></div>
           </div>
         </div>
         <div className="relative z-30 w-full md:w-1/3 flex flex-col gap-6">
@@ -88,7 +87,7 @@ function HomePage() {
           </button>
           {videoModalOpen && (
             <Modal
-              setModalOpen={setVideoModalOpen}
+              onClose={() => setVideoModalOpen(false)}
               title="Créditos a los creadores"
             >
               <div className="p-10">

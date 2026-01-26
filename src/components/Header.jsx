@@ -7,8 +7,9 @@ import Exit from "@/ui/icons/Exit";
 import LogIn from "@/ui/icons/LogIn";
 import { saludarPorHora } from "@/libs/utils";
 import User from "@/ui/icons/User";
+import Cart1 from "@/ui/icons/Carrito";
 
-export default function Header({ setModalOpen, setShowRegisterForm }) {
+export default function Header({ setModalOpen, setShowRegisterForm , setCartModalOpen}) {
   const { user, setUser } = useAuth();
 
   const navLinks = [
@@ -29,8 +30,10 @@ export default function Header({ setModalOpen, setShowRegisterForm }) {
           </li>
         ))}
       </ul>
+      
       {user && (
         <span className="mx-auto text-4xl">{saludarPorHora(user.name)}</span>
+        
       )}
 
       <div className="ml-auto flex items-center gap-5">
@@ -41,6 +44,9 @@ export default function Header({ setModalOpen, setShowRegisterForm }) {
             </button>
             <button>
               <User className="w-8 h-8 cursor-pointer hover:scale-115 hover:fill-green-600 transition-all duration-300" />
+            </button>
+            <button onClick={()=> setCartModalOpen(true)}>
+              <Cart1 className="w-8 h-8 cursor-pointer hover:scale-115 hover:fill-green-600 transition-all duration-300" />
             </button>
           </>
         ) : (

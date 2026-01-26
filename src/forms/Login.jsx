@@ -39,7 +39,8 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
           title: "¡Bienvenido!",
           text: "Nos alegra verte de nuevo",
           icon: "success",
-          confirmButtonColor: "#166534",
+          showConfirmButton:false,
+          timer:2000,
           background: "#1d1d1de8",
           color: "#ffffff",
         });
@@ -51,7 +52,8 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
           title: "Error",
           text: error.message,
           icon: "error",
-          confirmButtonColor: "#d33",
+          showConfirmButton: false,
+          timer:2000,
           background: "#1d1d1de8",
           color: "#ffffff",
         });
@@ -71,9 +73,9 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
         Continuar con Google
       </button>
       <div className="flex items-center my-4">
-        <hr className="flex-grow border-t border-gray-600" />
+        <hr className="grow border-t border-gray-600" />
         <span className="mx-2 text-gray-400">O</span>
-        <hr className="flex-grow border-t border-gray-600" />
+        <hr className="grow border-t border-gray-600" />
       </div>
       <form
         action=""

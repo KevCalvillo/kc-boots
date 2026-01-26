@@ -44,10 +44,11 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
         })
         .then((data) => {
           Swal.fire({
-            title: "¡Bienvenido!",
+            title: "¡Bienvenido a la Familia!",
             text: "Tu cuenta ha sido creada exitosamente.",
             icon: "success",
-            confirmButtonColor: "#166534",
+            showConfirmButton: false,
+            timer:2000,
             background: "#1d1d1de8",
             color: "#ffffff",
           });
@@ -59,7 +60,8 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
             title: "Error",
             text: error.message,
             icon: "error",
-            confirmButtonColor: "#d33",
+            showConfirmButton: false,
+            timer: 2000,
             background: "#1d1d1de8",
             color: "#ffffff",
           });
@@ -87,9 +89,9 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
         Continuar con Google
       </button>
       <div className="flex items-center my-4">
-        <hr className="flex-grow border-t border-gray-600" />
+        <hr className="grow border-t border-gray-600" />
         <span className="mx-2 text-gray-400">O</span>
-        <hr className="flex-grow border-t border-gray-600" />
+        <hr className="grow border-t border-gray-600" />
       </div>
       <form
         action=""
@@ -128,7 +130,7 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
             placeholder="Ingresa tu contraseña"
             onChange={handleOnChange}
             className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 
-            focus:ring-green-800 transition-all duration-300 border-1  
+            focus:ring-green-800 transition-all duration-300 border  
             ${!passwordMatch ? "border-red-500" : "border-transparent"}`}
           />
 
@@ -155,7 +157,7 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
             type={showPassword ? "text" : "password"}
             placeholder="Confirma tu contraseña"
             className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 
-            focus:ring-green-800 transition-all duration-300 border-1  
+            focus:ring-green-800 transition-all duration-300 border  
             ${!passwordMatch ? "border-red-500" : "border-transparent"}`}
           />
 
