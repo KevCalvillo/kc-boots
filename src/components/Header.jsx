@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import Exit from "@/ui/icons/Exit";
@@ -8,10 +8,30 @@ import LogIn from "@/ui/icons/LogIn";
 import { saludarPorHora } from "@/libs/utils";
 import User from "@/ui/icons/User";
 import Cart1 from "@/ui/icons/Carrito";
+import Swal from "sweetalert2";
 
-export default function Header({ setModalOpen, setShowRegisterForm , setCartModalOpen}) {
-  const { user, setUser } = useAuth();
+export default function Header({
+  setModalOpen,
+  setShowRegisterForm,
+  setCartModalOpen,
+}) {
+  const { user, setUser, cart } = useAuth();
 
+  function handleCartClick() {
+    if (cart.length === 0) {
+      Swal.fire({
+        title: "¡Carrito Vacío!",
+        text: "Agrega productos al carrito.",
+        icon: "warning",
+        timer: 2000,
+        background: "#1d1d1de8",
+        color: "#ffffff",
+        showConfirmButton: false,
+      });
+    } else {
+      setCartModalOpen(true);
+    }
+  }
   const navLinks = [
     { name: "Inicio", path: "/" },
     { name: "Categorías", path: "/categories" },
@@ -30,10 +50,9 @@ export default function Header({ setModalOpen, setShowRegisterForm , setCartModa
           </li>
         ))}
       </ul>
-      
+
       {user && (
         <span className="mx-auto text-4xl">{saludarPorHora(user.name)}</span>
-        
       )}
 
       <div className="ml-auto flex items-center gap-5">
@@ -45,7 +64,7 @@ export default function Header({ setModalOpen, setShowRegisterForm , setCartModa
             <button>
               <User className="w-8 h-8 cursor-pointer hover:scale-115 hover:fill-green-600 transition-all duration-300" />
             </button>
-            <button onClick={()=> setCartModalOpen(true)}>
+            <button onClick={() => handleCartClick()}>
               <Cart1 className="w-8 h-8 cursor-pointer hover:scale-115 hover:fill-green-600 transition-all duration-300" />
             </button>
           </>

@@ -1,42 +1,66 @@
-export default function Modal({
-  onClose,
-  children,
-}) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-[#101010ac] w-fit  rounded-3xl shadow-4xl relative overflow-hidden ">
-        <button
-        onClick={() => {
-          onClose()
-        }}
-          className="absolute top-6 right-6 text-stone-400 hover:text-white cursor-pointer"
-        >
-          <XmarkCircle className="w-8 h-8 fill-white hover:fill-red-500 hover:scale-110 transition-all duration-300" />
-        </button>
-        <div className="flex p-6 gap-10">{children}</div>
-      </div>
-    </div>
-  );
-}
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import XmarkCircle from "@/ui/icons/ExitCircle";
 
-function XmarkCircle(props) {
+export default function Modal({ isOpen, onClose, children }) {
+  const [show, setShow] = useState(isOpen);
+  const onCloseRef = useRef(onClose);
+
+  // Mantener la referencia actualizada
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShow(true);
+    }
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setShow(false);
+    setTimeout(() => {
+      onCloseRef.current();
+    }, 300);
+  };
+
   return (
-    <svg
-      className={props.className}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      transform="rotate(0 0 0)"
-    >
-      <path
-        opacity="0.4"
-        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM3.5 12C3.5 7.30558 7.30558 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C7.30558 20.5 3.5 16.6944 3.5 12Z"
-        fill={props.fill}
-      />
-      <path
-        d="M8.78363 8.78412C8.49074 9.07702 8.49074 9.55189 8.78363 9.84478L10.9389 12L8.78363 14.1552C8.49074 14.4481 8.49074 14.923 8.78363 15.2159C9.07653 15.5088 9.5514 15.5088 9.84429 15.2159L11.9995 13.0607L14.1547 15.2158C14.4476 15.5087 14.9224 15.5087 15.2153 15.2158C15.5082 14.9229 15.5082 14.448 15.2153 14.1551L13.0602 12L15.2153 9.84485C15.5082 9.55196 15.5082 9.07708 15.2153 8.78419C14.9224 8.4913 14.4476 8.4913 14.1547 8.78419L11.9995 10.9393L9.84429 8.78412C9.5514 8.49123 9.07653 8.49123 8.78363 8.78412Z"
-        fill={props.fill}
-      />
-    </svg>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={handleClose}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        >
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.7, opacity: 0, y: 20 }}
+            transition={{
+              type: "spring",
+              damping: 25,
+              stiffness: 300,
+            }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#101010cf] w-fit rounded-3xl shadow-4xl relative overflow-hidden"
+          >
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleClose}
+              className="absolute top-6 right-6 text-stone-400 hover:text-white cursor-pointer z-10"
+            >
+              <XmarkCircle className="w-8 h-8 fill-white hover:fill-red-500 transition-colors duration-300" />
+            </motion.button>
+            <div className="flex p-6 gap-10">{children}</div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,12 +1,16 @@
-import Plus from "@/ui/icons/Add"
+import Plus from "@/ui/icons/Add";
 import { useAuth } from "@/context/AuthContext";
 import Heart from "@/ui/icons/Heart";
 export default function BootCard({ bota }) {
-  const {addToCart, user, setModalOpen} = useAuth();
+  const { addToCart, user, setModalOpen, setShowRegisterForm } = useAuth();
 
-  function verificaUser(product){
-    user ? addToCart(product,true) :
-    setModalOpen(true)
+  function verificaUser(product) {
+    if (user) {
+      addToCart(product, true);
+    } else {
+      setModalOpen(true);
+      setShowRegisterForm(false);
+    }
   }
   return (
     <div className="max-w-xs rounded-3xl overflow-hidden shadow-2xl transition-all hover:scale-[1.02] duration-300">
@@ -32,7 +36,10 @@ export default function BootCard({ bota }) {
             <span className="text-2xl">${bota.price}</span>
           </div>
 
-          <button onClick={()=>verificaUser(bota)} className="bg-[#42763f] p-3 rounded-xl hover:bg-[#335331] transition-colors cursor-pointer shadow-lg shadow-green-900/20 group">
+          <button
+            onClick={() => verificaUser(bota)}
+            className="bg-[#42763f] p-3 rounded-xl hover:bg-[#335331] transition-colors cursor-pointer shadow-lg shadow-green-900/20 group"
+          >
             <Plus className="w-8 h-8 group-hover:scale-110 transition-transform" />
           </button>
         </div>
@@ -40,6 +47,3 @@ export default function BootCard({ bota }) {
     </div>
   );
 }
-
-
-
