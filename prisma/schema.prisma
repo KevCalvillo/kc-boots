@@ -27,6 +27,7 @@ model User {
   role Role @default(CUSTOMER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  orders Order[]
 }
 
 model Product{
@@ -44,10 +45,35 @@ model Product{
 
   category Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
+
+  orderItems OrderItem[]
 }
 
 model Category{
   id String @id @default(uuid())
   name String @unique
-  products Product[] //Una categoria tiene muchos productos
+  products Product[] 
+}
+
+model Order{
+  id String @id @default(uuid())
+  total Decimal
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  userId String 
+  orderItems OrderItem[]
+}
+
+model OrderItem{
+  id String @id @default(uuid())
+  orderId String
+  productId String
+  quantity Int
+  price Decimal
+
+  order Order @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 }

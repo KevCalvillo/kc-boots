@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Modal from "../Modal";
 import CartTable from "./CartTable";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function CartModal({
   isOpen,
@@ -13,11 +14,49 @@ export default function CartModal({
   onRemove,
   onCancel,
 }) {
-  const { getCartTotal } = useAuth();
-
+  const { getCartTotal, user } = useAuth();
+  const total = getCartTotal();
+  const router = useRouter();
   const handleCancel = () => {
     onCancel();
     onClose();
+  };
+
+  const handleCreateOrder = () => {
+
+    const orderData = {
+      userId: user.id,
+      total: total,
+      orderItems: cart.map((item) => ({
+        productId: item.id,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+    };
+
+    console.log("Datos a enviar:", orderData);
+
+    fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData)
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.message);
+        }
+        return res.json();
+      })
+      .then((order) => {
+        onClose();
+        router.push(`/checkout/${order.id}`)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const isEmpty = cart.length === 0;
@@ -56,15 +95,15 @@ export default function CartModal({
             transition={{ delay: 0.2, duration: 0.4 }}
             className="mt-8 pt-6 border-t border-stone-600"
           >
-            <div className="flex justify-between items-center text-white text-3xl font-bold mb-6">
+            <div className="flex justify-end gap-5 items-center text-white text-3xl font-bold mb-6">
               <span>Total:</span>
               <motion.span
-                key={getCartTotal()}
+                key={total}
                 initial={{ scale: 1.2 }}
                 animate={{ scale: 1 }}
-                className="text-green-500"
+                className="text-green-700"
               >
-                ${getCartTotal().toFixed(2)} USD
+                ${total.toFixed(2)} MXN
               </motion.span>
             </div>
           </motion.div>
@@ -86,6 +125,7 @@ export default function CartModal({
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleCreateOrder}
               className="text-2xl bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-8 rounded transition-colors cursor-pointer"
             >
               Pagar

@@ -5,7 +5,7 @@ import Google from "../ui/icons/Google";
 import Swal from "sweetalert2";
 import { calcularNivelPassword } from "@/libs/utils";
 
-export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
+export default function RegisterForm({ onClose, setShowRegisterForm }) {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [nivel, setNivel] = useState(0);
   const [password, setPassword] = useState("");
@@ -34,11 +34,10 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
           password: data.password,
         }),
       })
-        .then((res) => {
+        .then(async (res) => {
           if (!res.ok) {
-            return res.json().then((err) => {
-              throw new Error(err.message);
-            });
+            const err = await res.json();
+            throw new Error(err.message);
           }
           return res.json();
         })
@@ -52,7 +51,7 @@ export default function RegisterForm({ setModalOpen, setShowRegisterForm }) {
             background: "#1d1d1de8",
             color: "#ffffff",
           });
-          setModalOpen(false);
+          onClose()
           cleanState();
         })
         .catch((error) => {

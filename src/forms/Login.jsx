@@ -6,7 +6,7 @@ import EyeOpen from "../ui/icons/EyeOpen";
 import EyeClosed from "../ui/icons/EyeClosed";
 import Google from "../ui/icons/Google";
 
-export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
+export default function LoginForm({ onClose, setShowRegisterForm }) {
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAuth();
 
@@ -25,11 +25,10 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
         password: data.password,
       }),
     })
-      .then((res) => {
+      .then(async (res) => {
         if (!res.ok) {
-          return res.json().then((err) => {
-            throw new Error(err.message);
-          });
+          const err = await res.json();
+          throw new Error(err.message);
         }
         return res.json();
       })
@@ -39,13 +38,13 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
           title: "¡Bienvenido!",
           text: "Nos alegra verte de nuevo",
           icon: "success",
-          showConfirmButton:false,
-          timer:2000,
+          showConfirmButton: false,
+          timer: 2000,
           background: "#1d1d1de8",
           color: "#ffffff",
         });
 
-        setModalOpen(false);
+        onClose();
       })
       .catch((error) => {
         Swal.fire({
@@ -53,7 +52,7 @@ export default function LoginForm({ setModalOpen, setShowRegisterForm }) {
           text: error.message,
           icon: "error",
           showConfirmButton: false,
-          timer:2000,
+          timer: 2000,
           background: "#1d1d1de8",
           color: "#ffffff",
         });

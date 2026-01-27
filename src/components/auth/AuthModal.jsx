@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Modal from "../Modal";
-import Auth from "./Auth";
+import LoginForm from "../../forms/Login";
+import RegisterForm from "../../forms/Register";
 
 export default function AuthModal({
   isOpen,
@@ -24,11 +25,21 @@ export default function AuthModal({
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        <Auth
-          setModalOpen={onClose}
-          showRegisterForm={showRegisterForm}
-          setShowRegisterForm={setShowRegisterForm}
-        />
+        <div className="p-10 pb-0 w-96">
+          {showRegisterForm ? (
+            <RegisterForm
+              onClose={onClose}
+              setShowRegisterForm={setShowRegisterForm}
+            />
+          ) : (
+            <>
+              <LoginForm
+                onClose={onClose}
+                setShowRegisterForm={setShowRegisterForm}
+              />
+            </>
+          )}
+        </div>
       </motion.div>
     </Modal>
   );
