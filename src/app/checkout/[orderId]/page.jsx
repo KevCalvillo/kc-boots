@@ -31,35 +31,13 @@ export default async function CheckoutPage({ params }) {
             CHECKOUT
           </h1>
 
-          {/* Progress Bar Mejorado */}
-          <div className="flex items-center gap-4 text-sm md:text-base">
-            <div className="flex items-center gap-2 text-primary font-bold">
-              <div className="w-8 h-8 rounded-full bg-primary text-black flex items-center justify-center">
-                1
-              </div>
-              <span>Envío</span>
-            </div>
-            <div className="w-16 h-0.5 bg-stone-700"></div>
-            <div className="flex items-center gap-2 text-stone-500">
-              <div className="w-8 h-8 rounded-full border border-stone-600 flex items-center justify-center">
-                2
-              </div>
-              <span>Pago</span>
-            </div>
-            <div className="w-16 h-0.5 bg-stone-700"></div>
-            <div className="flex items-center gap-2 text-stone-500">
-              <div className="w-8 h-8 rounded-full border border-stone-600 flex items-center justify-center">
-                3
-              </div>
-              <span>Confirmación</span>
-            </div>
-          </div>
+          
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* COLUMNA IZQUIERDA: FORMULARIO (Ocupa 7 columnas) */}
           <div className="lg:col-span-7">
-            <CheckoutForm orderId={orderId} total={total} />
+            <CheckoutForm orderId={orderId} total={total} orderUserId={order.userId} />
           </div>
 
           {/* COLUMNA DERECHA: RESUMEN (Ocupa 5 columnas y es Sticky) */}

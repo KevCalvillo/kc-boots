@@ -73,7 +73,7 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="text-3xl font-rancho text-white mb-6">Método de Pago</h3>
+      <h3 className="text-4xl font-rancho text-white mb-6 text-center">Método de Pago</h3>
       <PaymentElement />
       {error && <p className="text-red-500 mt-4">{error}</p>}
       <button
