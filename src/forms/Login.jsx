@@ -83,6 +83,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
       >
         <label htmlFor="" className="text-white">
           Email:
+          
         </label>
         <input
           required
@@ -119,7 +120,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
 
         <button
           type="submit"
-          className="w-full bg-green-800 hover:bg-green-900 hover:scale-102 duration-300 text-white font-bold py-2 px-4 mt-4 rounded transition-all cursor-pointer"
+          className="w-full bg-primary hover:bg-blue-500 hover:scale-102 duration-300 text-white font-bold py-2 px-4 mt-4 rounded transition-all cursor-pointer"
         >
           Iniciar Sesion
         </button>

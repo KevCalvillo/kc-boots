@@ -1,10 +1,20 @@
 
 import "./globals.css";
-import { Rancho } from "next/font/google";
+import { Roboto_Slab, Rancho } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
-const rancho = Rancho({ subsets: ["latin"], weight: ["400"] });
 import NavbarLayout from "@/components/NavbarLayout";
 
+const fontRobotoSlab = Roboto_Slab({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-roboto_slab",
+});
+
+const fontRancho = Rancho({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-rancho",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -14,13 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={rancho.className}>
+      <body className={`${fontRobotoSlab.className} ${fontRancho.variable}`}>
         <AuthProvider>
-          <NavbarLayout>
-            {children}
-          </NavbarLayout>
+          <NavbarLayout>{children}</NavbarLayout>
         </AuthProvider>
-
       </body>
     </html>
   );

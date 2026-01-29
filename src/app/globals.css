@@ -1,8 +1,22 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --color-primary: #a18046;
+  --color-primary-hover: #6e5730;
+  --color-secondary: #7272728c;
+  --color-secondary-hover: #1f1f1f;
+  --color-bgprimary: #010101;
+  --color-text:#E0E0E0;
+
+  --font-roboto: var(--font-roboto-slab);
+  
+  --font-rancho: var(--font-rancho);
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #181818;
+  background: var(--color-bgprimary);
+  font-family: var(--font-roboto);
 }

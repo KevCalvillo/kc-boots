@@ -19,6 +19,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
 
   function handleOnSubmit(e) {
     e.preventDefault();
+    console.log(e)
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     console.log(data);

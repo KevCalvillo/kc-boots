@@ -4,6 +4,7 @@ import AuthModal from "./auth/AuthModal";
 import CartModal from "./cart/CartModal";
 import DeletedItemNotification from "./cart/DeletedItem"
 import { useAuth } from "@/context/AuthContext";
+import Footer from "./Footer";
 
 export default function NavbarLayout({ children }) {
   const {
@@ -31,6 +32,8 @@ export default function NavbarLayout({ children }) {
       />
 
       {children}
+
+      <Footer/>
 
       <AuthModal
         isOpen={modalOpen}

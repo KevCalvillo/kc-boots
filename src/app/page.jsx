@@ -30,11 +30,6 @@ function HomePage() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
   const scaleIn = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
@@ -77,7 +72,6 @@ function HomePage() {
       imageUrl: "/bota4.webp",
       rating: 4,
     },
-    
   ];
 
   return (
@@ -104,7 +98,7 @@ function HomePage() {
             <motion.h1
               variants={fadeInUp}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-[7rem] font-bold leading-none drop-shadow-2xl"
+              className="text-[8rem] mb-5 font-bold leading-none drop-shadow-2xl font-rancho"
             >
               Bienvenidos a <br />
               KC Boots
@@ -112,7 +106,7 @@ function HomePage() {
             <motion.h2
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-[2.5rem]"
+              className="text-[3rem] font-rancho"
             >
               Calidad artesanal en cada paso
             </motion.h2>
@@ -127,18 +121,18 @@ function HomePage() {
             <motion.div
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-              className="flex items-center gap-5"
+              className="flex items-center mt-8 gap-5"
             >
               <button
                 onClick={() => {
                   setModalOpen(true);
                   setShowRegisterForm(true);
                 }}
-                className="text-2xl mt-5 bg-green-800 hover:bg-green-900 hover:scale-105 duration-300 text-white font-bold py-2 px-4 rounded transition-all cursor-pointer"
+                className="text-2xl bg-primary hover:bg-primary-hover hover:scale-105 duration-300 font-bold py-3 px-8 rounded-full transition-all cursor-pointer shadow-lg"
               >
                 Registrarme
               </button>
-              <button className="text-2xl mt-5 bg-[#7272728c] hover:bg-green-900 hover:scale-105 duration-300 text-white font-bold py-2 px-4 rounded transition-all">
+              <button className="text-2xl bg-secondary/40 backdrop-blur-md hover:bg-secondary-hover hover:scale-102 duration-300 font-bold py-3 px-8 rounded-full transition-all border border-white/20">
                 <Link href="/boots">Explora Nuestro Catálogo</Link>
               </button>
             </motion.div>
@@ -148,8 +142,7 @@ function HomePage() {
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-[#000000] to-transparent z-10"></div>
       </section>
 
-      {/* BENEFICIOS RÁPIDOS */}
-      <section className="bg-[#000000] py-20 border-y">
+      <section className="py-20 border-y">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -157,40 +150,37 @@ function HomePage() {
           variants={staggerContainer}
           className="container mx-auto px-10"
         >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 font-roboto">
             {[
               {
                 icon: Truck,
                 title: "Envío Gratis",
-                description: "En compras mayores a $1,500",
+                desc: "En compras mayores a $1,500",
               },
               {
                 icon: Award,
-                title: "Garantía de Calidad",
-                description: "2 años en manufactura",
+                title: "Garantía Elite",
+                desc: "2 años en manufactura",
               },
               {
                 icon: Clock,
                 title: "Entrega Rápida",
-                description: "3-5 días hábiles",
+                desc: "3-5 días hábiles",
               },
-              {
-                icon: Star,
-                title: "Satisfacción 100%",
-                description: "Devoluciones gratuitas",
-              },
+              { icon: Star, title: "Calidad 100%", desc: "Satisfacción total" },
             ].map((benefit, index) => (
               <motion.div
                 key={index}
                 variants={scaleIn}
-                transition={{ delay: index * 0.1 }}
-                className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl hover:bg-stone-900/50 transition-colors"
+                className="flex flex-col items-center text-center gap-4 group"
               >
-                <benefit.icon className="w-12 h-12 text-green-600" />
-                <h3 className="text-white text-2xl font-bold">
+                <benefit.icon className="w-14 h-14 text-primary group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-white text-2xl font-bold tracking-tight">
                   {benefit.title}
                 </h3>
-                <p className="text-stone-400 text-lg">{benefit.description}</p>
+                <p className="text-stone-500 text-lg font-light">
+                  {benefit.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -204,40 +194,33 @@ function HomePage() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className=""
         >
-          <motion.div variants={fadeInUp} className="text-center mb-20">
-            <h2 className="text-6xl font-bold text-white mb-4 uppercase tracking-tight">
-              HOT 2026
+          <motion.div variants={fadeInUp} className="text-center mb-24">
+            <h2 className="text-8xl font-rancho text-white mb-4">
+              Modelos de Temporada
             </h2>
-            <p className="text-stone-400 text-2xl">
-              Nuestras botas más populares
+            <p className="text-primary font-roboto text-xl uppercase tracking-[0.3em]">
+              Colección Hot 2026
             </p>
           </motion.div>
 
-          <div className="flex items-center justify-evenly">
+          <div className="flex flex-wrap items-center justify-center gap-12">
             {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 variants={scaleIn}
-                transition={{ delay: index * 0.5 }}
+                transition={{ delay: index * 0.2 }}
               >
-                <BootCard bota={product}/>
+                <BootCard bota={product} />
               </motion.div>
             ))}
           </div>
 
-          <motion.div
-            variants={fadeInUp}
-            transition={{ delay: 0.6 }}
-            className="text-center mt-16"
-          >
+          <motion.div variants={fadeInUp} className="text-center mt-20">
             <Link href="/boots">
-              <button
-                className="text-2xl bg-green-800 hover:bg-green-900 hover:scale-105 cursor-pointer text-white font-bold py-3 px-8 rounded-xl transition-all inline-flex items-center gap-3"
-              >
-                Ver Catálogo Completo
-                <ArrowRight className="w-6 h-6" />
+              <button className="text-2xl bg-primary hover:bg-primary-hover hover:scale-105 cursor-pointer text-white font-roboto font-bold py-4 px-10 rounded-full transition-all inline-flex items-center gap-4 shadow-xl">
+                Ver Todo el Catálogo
+                <ArrowRight className="w-7 h-7" />
               </button>
             </Link>
           </motion.div>
@@ -276,14 +259,14 @@ function HomePage() {
           <motion.h2
             variants={slideInRight}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-bold text-white leading-tight"
+            className="text-5xl md:text-8xl font-bold text-white leading-tight font-rancho"
           >
             Tradición en <br /> Cada Costura
           </motion.h2>
           <motion.p
             variants={slideInRight}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-3xl text-stone-300 max-w-lg"
+            className="text-2xl font-roboto font-light text-stone-300 leading-relaxed italic border-l-2 border-primary pl-4"
           >
             Nuestras botas son fabricadas por manos expertas en León,
             Guanajuato, utilizando técnicas centenarias y pieles de la más alta
@@ -291,11 +274,9 @@ function HomePage() {
           </motion.p>
           <motion.button
             variants={slideInRight}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => setVideoModalOpen(true)}
-            className="text-2xl mt-5 bg-[#7272728c] hover:bg-green-900 w-fit px-10 duration-300 text-white font-bold py-2 rounded transition-all cursor-pointer"
+            className="text-xl font-roboto cursor-pointer mt-10 bg-white/10 hover:bg-primary backdrop-blur-sm w-fit px-10 py-3 rounded-full text-white font-bold transition-all border border-white/20"
           >
             Conoce el proceso
           </motion.button>
@@ -326,81 +307,65 @@ function HomePage() {
       </Modal>
 
       {/* INGENIERÍA ARTESANAL SECTION */}
-      <section className="h-screen flex flex-col items-center justify-center bg-black px-10 md:px-20 relative overflow-hidden">
+      <section className="min-h-screen flex flex-col items-center justify-center bg-black py-32 px-10 md:px-20">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
           <motion.h2
             variants={fadeInUp}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold text-white mb-8 uppercase tracking-tighter"
+            className="text-7xl font-rancho text-white mb-6"
           >
             Ingeniería Artesanal
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-stone-400 text-3xl max-w-2xl mx-auto font-light"
+            className="text-stone-400 text-2xl max-w-3xl mx-auto font-roboto font-light"
           >
-            No solo es estética, seleccionamos cada componente para que tus
-            botas duren décadas, no temporadas.
+            Combinamos el diseño vanguardista con la durabilidad que solo el
+            trabajo a mano puede ofrecer.
           </motion.p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 font-roboto">
           {[
             {
               icon: ShieldCheck,
               title: "Piel de Grano Entero",
-              description:
-                "Utilizamos la capa más resistente de la piel, manteniendo las marcas naturales que hacen que cada bota sea única e irrepetible.",
+              desc: "Seleccionamos solo la capa más resistente para una bota que dura décadas.",
             },
             {
               icon: Layers,
               title: "Construcción Welt",
-              description:
-                "El método Goodyear Welt permite que la bota sea totalmente resoleable, extendiendo su vida útil por muchos años.",
+              desc: "Resoleable y robusta, diseñada para acompañarte toda la vida.",
             },
             {
               icon: Zap,
               title: "Suela de Nitrilo",
-              description:
-                "Resistencia extrema al aceite y la abrasión, diseñada para ofrecer tracción máxima en cualquier terreno difícil.",
+              desc: "Máxima tracción y resistencia química en cualquier terreno.",
             },
           ].map((feature, index) => (
             <motion.div
               key={index}
               variants={scaleIn}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05, borderColor: "rgb(34, 197, 94)" }}
-              className="bg-[#1d1d1dbc] p-10 rounded-3xl border border-stone-800 transition-colors duration-500 group"
+              whileHover={{ y: -10 }}
+              className="bg-stone-900/40 p-12 rounded-[2rem] border border-stone-800 hover:border-primary transition-all duration-500"
             >
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-                className="mb-6 inline-block p-4 bg-stone-800 rounded-2xl group-hover:bg-green-900/30 transition-colors"
-              >
-                <feature.icon className="w-10 h-10 text-green-700" />
-              </motion.div>
-              <h3 className="text-4xl font-bold text-white mb-4">
+              <div className="mb-8 inline-block p-5 bg-primary/10 rounded-2xl">
+                <feature.icon className="w-10 h-10 text-primary" />
+              </div>
+              <h3 className="text-3xl font-bold text-white mb-4">
                 {feature.title}
               </h3>
-              <p className="text-stone-400 leading-relaxed text-2xl">
-                {feature.description}
+              <p className="text-stone-400 leading-relaxed text-xl font-light">
+                {feature.desc}
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* NÚMEROS/ESTADÍSTICAS */}
@@ -414,29 +379,29 @@ function HomePage() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-6xl font-bold text-white text-center mb-20 uppercase"
+            className="text-6xl font-bold text-white text-center mb-20 font-rancho"
           >
             Nuestra Historia en Números
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {[
-              { number: "25+", label: "Años de Experiencia", icon: Clock },
-              { number: "50K+", label: "Clientes Satisfechos", icon: Users },
-              { number: "100%", label: "Hecho en México", icon: MapPin },
-              { number: "4.9★", label: "Calificación Promedio", icon: Star },
+              { num: "25+", label: "Años de Herencia", icon: Clock },
+              { num: "50K+", label: "Clientes Reales", icon: Users },
+              { num: "100%", label: "Orgullo Mexicano", icon: MapPin },
+              { num: "4.9★", label: "Reputación", icon: Star },
             ].map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={scaleIn}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-10 bg-[#1a1a1a] rounded-3xl border border-stone-800"
+                className="text-center p-12 bg-black/50 rounded-3xl border border-white/5"
               >
-                <stat.icon className="w-12 h-12 text-green-600 mx-auto mb-4" />
-                <h3 className="text-6xl font-bold text-green-500 mb-2">
-                  {stat.number}
+                <stat.icon className="w-10 h-10 text-primary mx-auto mb-6 opacity-50" />
+                <h3 className="text-6xl font-bold text-white mb-2">
+                  {stat.num}
                 </h3>
-                <p className="text-stone-400 text-xl">{stat.label}</p>
-              </motion.div>
+                <p className="text-stone-500 text-lg uppercase tracking-widest">
+                  {stat.label}
+                </p>
+              </div>
             ))}
           </div>
         </motion.div>
@@ -453,7 +418,7 @@ function HomePage() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-6xl font-bold text-white text-center mb-20 uppercase"
+            className="text-6xl font-bold text-white text-center mb-20 font-rancho"
           >
             Lo Que Dicen Nuestros Clientes
           </motion.h2>
@@ -492,7 +457,7 @@ function HomePage() {
                     />
                   ))}
                 </div>
-                <QuoteIcon className="w-10 h-10 text-green-800 mb-4" />
+                <QuoteIcon className="w-10 h-10 text-primary mb-4" />
                 <p className="text-stone-300 text-xl italic mb-6">
                   &quot;{testimonial.text}&quot;
                 </p>
@@ -509,46 +474,39 @@ function HomePage() {
       </section>
 
       {/* CTA FINAL */}
-      <section className="py-32 bg-gradient-to-b from-black to-stone-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat"></div>
-        </div>
+      <section className="py-40 bg-black relative overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto text-center px-10 relative z-10"
+          className="container mx-auto text-center px-10 relative z-10 font-roboto"
         >
-          <h2 className="text-6xl md:text-7xl font-bold text-white mb-8">
-            ¿Listo Para Tu Próximo Par?
+          <h2 className="text-7xl md:text-8xl font-rancho text-white mb-10 leading-tight">
+            ¿Listo Para Tu <br /> Próximo Par?
           </h2>
-          <p className="text-stone-400 text-2xl mb-12 max-w-2xl mx-auto">
-            Únete a miles de clientes satisfechos y experimenta la diferencia de
-            la verdadera artesanía mexicana.
+          <p className="text-stone-400 text-2xl mb-16 max-w-3xl mx-auto font-light leading-relaxed">
+            Únete a la familia KC Boots y experimenta la diferencia de caminar
+            con calzado premium fabricado para durar.
           </p>
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <motion.button
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)",
+                boxShadow: "0 0 40px rgba(161, 128, 70, 0.4)",
               }}
-              whileTap={{ scale: 0.95 }}
-              className="text-2xl bg-green-800 hover:bg-green-900 text-white font-bold py-4 px-10 rounded-xl transition-all"
+              className="text-2xl bg-primary text-white font-bold py-5 px-14 rounded-full transition-all"
             >
-              <Link href="/boots">Ver Catálogo</Link>
+              <Link href="/boots">Ver Catálogo Completo</Link>
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setModalOpen(true);
                 setShowRegisterForm(true);
               }}
-              className="text-2xl bg-transparent border-2 border-green-800 hover:bg-green-900/20 text-white font-bold py-4 px-10 rounded-xl transition-all"
+              className="text-2xl bg-transparent border-2 border-stone-700 hover:border-primary text-white font-bold py-5 px-14 rounded-full transition-all"
             >
-              Crear Cuenta
+              Crear Cuenta Gratis
             </motion.button>
           </div>
         </motion.div>
