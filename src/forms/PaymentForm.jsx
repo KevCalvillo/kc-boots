@@ -6,12 +6,17 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
-export default function PaymentForm({ total, onSuccess }) {
+export default function PaymentForm({ total, onSuccess, orderId }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {cleanCart, user, cart} = useAuth();
+
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +45,27 @@ export default function PaymentForm({ total, onSuccess }) {
         color: "#ffffff",
       });
     } else if (paymentIntent.status === "succeeded") {
+      await fetch(`/api/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "paid" }),
+      });
+
+      // Enviar correo de confirmación
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email, // Necesitas obtener el email del usuario
+          orderId: orderId,
+          cart: cart, // Necesitas obtener el carrito
+          total: total,
+        }),
+      });
+
       onSuccess(3);
+      cleanCart();
+      router.push(`/order-confirmation/${orderId}`);
     }
 
     setIsLoading(false);

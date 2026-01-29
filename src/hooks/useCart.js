@@ -7,16 +7,16 @@ export function useCart() {
   const [deletedItem, setDeletedItem] = useState(null);
 
   const emptyCartAlert = () => {
-     Swal.fire({
-       title: "¡Carrito Vacío!",
-       text: "Agrega productos al carrito.",
-       icon: "warning",
-       timer: 2000,
-       background: "#1d1d1de8",
-       color: "#ffffff",
-       showConfirmButton: false,
-     });
-  }
+    Swal.fire({
+      title: "¡Carrito Vacío!",
+      text: "Agrega productos al carrito.",
+      icon: "warning",
+      timer: 2000,
+      background: "#1d1d1de8",
+      color: "#ffffff",
+      showConfirmButton: false,
+    });
+  };
 
   const addToCartAlert = (product) => {
     Swal.fire({
@@ -28,9 +28,9 @@ export function useCart() {
       color: "#ffffff",
       showConfirmButton: false,
     });
-  }
-  
-  const addToCart = (product,showAlert) => {
+  };
+
+  const addToCart = (product, showAlert) => {
     setCart((prevCart) => {
       const existe = prevCart.find((item) => item.id === product.id);
 
@@ -42,7 +42,7 @@ export function useCart() {
         );
       } else {
         if (showAlert) {
-          addToCartAlert(product.title)
+          addToCartAlert(product.title);
         }
         return [...prevCart, { ...product, quantity: 1 }];
       }
@@ -78,7 +78,11 @@ export function useCart() {
 
   const cancelCart = () => {
     setCart([]);
-    emptyCartAlert()
+    emptyCartAlert();
+  };
+
+  const cleanCart = () => {
+    setCart([]);
   };
 
   const getCartTotal = () => {
@@ -101,6 +105,7 @@ export function useCart() {
     getCartTotal,
     getCartItemCount,
     emptyCartAlert,
-    addToCartAlert
+    addToCartAlert,
+    cleanCart
   };
 }

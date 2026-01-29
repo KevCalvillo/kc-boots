@@ -7,7 +7,7 @@ import NavbarLayout from "@/components/NavbarLayout";
 const fontRobotoSlab = Roboto_Slab({
   subsets: ["latin"],
   weight: ["400", "700"],
-  variable: "--font-roboto_slab",
+  variable: "--font-roboto-slab",
 });
 
 const fontRancho = Rancho({
@@ -24,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${fontRobotoSlab.className} ${fontRancho.variable}`}>
+      <body className={`${fontRobotoSlab.variable} ${fontRancho.variable}`}>
         <AuthProvider>
           <NavbarLayout>{children}</NavbarLayout>
         </AuthProvider>

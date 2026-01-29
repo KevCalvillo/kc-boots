@@ -4,7 +4,7 @@ import { Truck, Package } from "lucide-react";
 import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "./PaymentForm";
-
+import { useRouter } from "next/navigation";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
@@ -13,7 +13,7 @@ export default function CheckoutForm({ orderId, total }) {
   const [shippingMethod, setShippingMethod] = useState("standard");
   const [step, setStep] = useState(1);
   const [clientSecret, setClientSecret] = useState(null);
-
+  const router = useRouter();
   const inputStyle =
     "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
   const labelStyle = "text-sm text-stone-400 ml-1 mb-2 block"; // Agregué block y mb-2 para mejor espaciado
@@ -294,14 +294,16 @@ export default function CheckoutForm({ orderId, total }) {
               Continuar al Pago
             </button>
           </>
-        ) : step===2?(
+        ) : (
           <Elements stripe={stripePromise} options={{ clientSecret }}>
             <div>
-              <PaymentForm total={total} onSuccess={setStep}/>
+              <PaymentForm
+                total={total}
+                onSuccess={setStep}
+                orderId={orderId}
+              />
             </div>
           </Elements>
-        ):(
-          <div>Pago exitoso</div>
         )}
       </div>
     </div>
