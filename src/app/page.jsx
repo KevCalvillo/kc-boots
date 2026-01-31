@@ -99,7 +99,7 @@ function HomePage() {
             <motion.h1
               variants={fadeInUp}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-[8rem] mb-5 font-bold leading-none drop-shadow-2xl font-rancho"
+              className="text-[8rem] mb-5 font-bold leading-none drop-shadow-2xl font-rancho tracking-wide"
             >
               Bienvenidos a <br />
               KC Boots

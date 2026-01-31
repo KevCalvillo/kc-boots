@@ -78,7 +78,7 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
       {error && <p className="text-red-500 mt-4">{error}</p>}
       <button
         disabled={!stripe || isLoading}
-        className="mt-6 w-full bg-primary text-white font-bold py-4 rounded-full text-xl disabled:opacity-50"
+        className="mt-6 w-full bg-primary text-bgprimary font-bold py-4 rounded-full text-xl disabled:opacity-50"
       >
         {isLoading ? "Procesando..." : `Pagar $${total.toLocaleString()}`}
       </button>

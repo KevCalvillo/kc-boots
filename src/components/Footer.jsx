@@ -85,7 +85,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary-hover text-white px-6 rounded-full font-bold transition-all text-sm uppercase tracking-tighter"
+              className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary-hover  px-6 rounded-full font-bold transition-all text-sm uppercase tracking-tighter"
             >
               Unirme
             </button>

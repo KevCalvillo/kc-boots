@@ -18,14 +18,14 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
   const router = useRouter();
   const { user } = useAuth();
 
-  // Redirección con useEffect
+  
   useEffect(() => {
     if (user && user.id !== orderUserId) {
       router.push("/");
     }
   }, [user, orderUserId, router]);
 
-  // Si no hay usuario
+
   if (!user) {
     return (
       <div className="bg-[#121212] flex flex-col items-center justify-center p-10 rounded-3xl border border-stone-800 text-center">
@@ -40,7 +40,7 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
     );
   }
 
-  // Si la orden no es del usuario (mientras redirige)
+ 
   if (user.id !== orderUserId) {
     return null;
   }
@@ -115,9 +115,9 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
   return (
     <div className="bg-[#121212] p-8 md:p-10 rounded-3xl border border-stone-800 shadow-lg font-roboto">
       <div className="flex flex-col gap-8">
-        {/* Progress Bar Mejorado */}
+        
         <div className="flex items-center justify-center gap-4 text-sm md:text-base">
-          {/* Step 1 */}
+          
           <div className={`flex items-center gap-2 ${getStepStyle(1).text}`}>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${getStepStyle(1).circle}`}
@@ -131,7 +131,7 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
             className={`w-16 h-0.5 ${step >= 2 ? "bg-primary" : "bg-stone-700"}`}
           ></div>
 
-          {/* Step 2 */}
+          
           <div className={`flex items-center gap-2 ${getStepStyle(2).text}`}>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${getStepStyle(2).circle}`}
@@ -145,7 +145,7 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
             className={`w-16 h-0.5 ${step >= 3 ? "bg-primary" : "bg-stone-700"}`}
           ></div>
 
-          {/* Step 3 */}
+          
           <div className={`flex items-center gap-2 ${getStepStyle(3).text}`}>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${getStepStyle(3).circle}`}
@@ -395,7 +395,7 @@ export default function CheckoutForm({ orderId, total, orderUserId }) {
             </div>
             <button
               onClick={handleButtonClick}
-              className="mt-6 w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-full text-xl shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1"
+              className="mt-6 w-full bg-primary hover:bg-primary-hover text-bgprimary font-bold py-4 rounded-full text-xl shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1"
             >
               Continuar al Pago
             </button>
