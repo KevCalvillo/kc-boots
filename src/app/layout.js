@@ -24,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${fontRobotoSlab.variable} ${fontRancho.variable}`}>
+      <body className={`${fontRobotoSlab.className} ${fontRancho.variable}`}>
         <AuthProvider>
           <NavbarLayout>{children}</NavbarLayout>
         </AuthProvider>

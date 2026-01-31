@@ -13,10 +13,7 @@ export default function Modal({ isOpen, onClose, children }) {
   }, [onClose]);
 
   useEffect(() => {
-    if (isOpen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShow(true);
-    }
+    setShow(isOpen);
   }, [isOpen]);
 
   const handleClose = () => {

@@ -19,7 +19,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    console.log(e)
+    console.log(e);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
@@ -48,11 +48,11 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             text: "Tu cuenta ha sido creada exitosamente.",
             icon: "success",
             showConfirmButton: false,
-            timer:2000,
+            timer: 2000,
             background: "#1d1d1de8",
             color: "#ffffff",
           });
-          onClose()
+          onClose();
           cleanState();
         })
         .catch((error) => {
@@ -78,17 +78,17 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
   }
   return (
     <>
-      <h1 className="text-white text-center block mb-4 text-4xl">
+      <h1 className="text-white text-center text-5xl font-rancho">
         Crea una cuenta
-        <p className="text-sm text-stone-500 mt-1">
-          Ingresa tus datos para registrarte.
-        </p>
       </h1>
-      <button className="w-full bg-[#3a3a3a] flex items-center justify-center gap-3 text-white py-2 px-4 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300">
-        <Google />
+      <p className="text-lg text-stone-500 text-center mb-4">
+        Ingresa tus datos para registrarte.
+      </p>
+      <button className="w-full bg-primary hover:bg-primary-hover font-bold cursor-pointer flex items-center justify-center gap-3 py-2 px-4 rounded-full mb-4 focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300">
+        <Google className="w-7 h-7" />
         Continuar con Google
       </button>
-      <div className="flex items-center my-4">
+      <div className="flex items-center my-2">
         <hr className="grow border-t border-gray-600" />
         <span className="mx-2 text-gray-400">O</span>
         <hr className="grow border-t border-gray-600" />
@@ -96,7 +96,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
       <form
         action=""
         onSubmit={handleOnSubmit}
-        className="text-md flex flex-col gap-1"
+        className="text-md flex flex-col gap-2"
       >
         <label htmlFor="" className="text-white">
           Nombre:
@@ -106,7 +106,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           type="text"
           placeholder="Ingresa tu nombre"
           required
-          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300"
+          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
         />
         <label htmlFor="" className="text-white">
           Email:
@@ -116,7 +116,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           name="email"
           type="email"
           placeholder="Ingresa tu email"
-          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300"
+          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
         />
 
         <label htmlFor="" className="text-white">
@@ -129,20 +129,20 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
             onChange={handleOnChange}
-            className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 
-            focus:ring-green-800 transition-all duration-300 border  
+            className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 
+            focus:ring-primary transition-all duration-300 border  
             ${!passwordMatch ? "border-red-500" : "border-transparent"}`}
           />
 
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-1/2 right-3 transform -translate-y-1/2 text-stone-400 hover:text-white"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeOpen className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300" />
             ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300" />
+              <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300" />
             )}
           </button>
         </div>
@@ -156,30 +156,25 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
             placeholder="Confirma tu contraseña"
-            className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 
-            focus:ring-green-800 transition-all duration-300 border  
+            className={`w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 
+            focus:ring-primary transition-all duration-300 border  
             ${!passwordMatch ? "border-red-500" : "border-transparent"}`}
           />
 
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-1/2 right-3 transform -translate-y-1/2 text-stone-400 hover:text-white"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
+              <EyeOpen className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
             ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
+              <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
             )}
           </button>
         </div>
-        {!passwordMatch && (
-          <p className="text-red-500 text-center">
-            Las contraseñas no coinciden.
-          </p>
-        )}
 
-        <div className="w-full h-2 bg-gray-700 rounded-full my-4 overflow-hidden ">
+        <div className="w-full h-2 bg-gray-700 mt-2 rounded-full overflow-hidden ">
           <div
             className={`h-full transition-all duration-500 ${
               nivel === 1
@@ -193,21 +188,32 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           ></div>
         </div>
         <p className="text-white text-center ">Fortaleza de la Contraseña</p>
-        <p className="text-stone-500 text-md text-center leading-tight mb-2">
-          Recuerda usar simbolos especiales, numeros , mayusculas y minusculas.
-        </p>
+        {!passwordMatch ? (
+          <p className="text-red-500 text-center">
+            Las contraseñas no coinciden.
+          </p>
+        ) : (
+          <p className="text-stone-500 text-sm text-center leading-5 mb-2">
+            Usa simbolos especiales, numeros  ,mayusculas y
+            minusculas.
+          </p>
+        )}
+
         <button
           type="submit"
           disabled={nivel < 3}
-          className=" w-full disabled:bg-stone-600 bg-green-800 hover:bg-green-900 hover:scale-102 duration-300 text-white font-bold py-2 px-4 rounded transition-all "
+          className="text-xl disabled:bg-stone-600 bg-primary hover:bg-primary-hover disabled:scale-100 hover:scale-102 duration-300 font-bold py-2 rounded-full transition-all cursor-pointer"
         >
           Registrarse
         </button>
-        <label htmlFor="" className="text-white text-center block mt-2">
+        <label
+          htmlFor=""
+          className="text-white text-center mt-2 flex justify-center gap-2"
+        >
           Si ya tienes cuenta <br />
           <button
             onClick={() => setShowRegisterForm(false)}
-            className="text-green-500 hover:text-green-700 cursor-pointer"
+            className="text-primary hover:text-primary-hover cursor-pointer transition-colors"
           >
             Inicia sesión aquí
           </button>

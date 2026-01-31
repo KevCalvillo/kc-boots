@@ -61,17 +61,17 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
 
   return (
     <>
-      <h1 className="text-white text-center block mb-4 text-4xl">
+      <h1 className="text-white text-center text-5xl font-rancho">
         Iniciar Sesion
-        <p className="text-sm text-stone-500 mt-1">
-          Ingresa tus datos para iniciar sesion.
-        </p>
       </h1>
-      <button className="w-full bg-[#3a3a3a] flex items-center justify-center gap-3 text-white py-2 px-4 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300">
-        <Google />
+      <p className="text-lg text-stone-500 mb-4 mt-2 text-center">
+        Ingresa tus credenciales.
+      </p>
+      <button className="w-full bg-primary hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-2 px-4 rounded-full mb-4 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300">
+        <Google className='w-7 h-7'/>
         Continuar con Google
       </button>
-      <div className="flex items-center my-4">
+      <div className="flex items-center my-6">
         <hr className="grow border-t border-gray-600" />
         <span className="mx-2 text-gray-400">O</span>
         <hr className="grow border-t border-gray-600" />
@@ -79,18 +79,17 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
       <form
         action=""
         onSubmit={handleOnSubmit}
-        className="text-md flex flex-col gap-2"
+        className="text-md flex flex-col gap-4"
       >
         <label htmlFor="" className="text-white">
           Email:
-          
         </label>
         <input
           required
           name="email"
           type="email"
           placeholder="Ingresa tu email"
-          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300"
+          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
         />
 
         <label htmlFor="" className="text-white">
@@ -102,13 +101,13 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
             name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
-            className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800 transition-all duration-300 "
+            className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 "
           />
 
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-1/2 right-3 transform -translate-y-1/2 text-stone-400 hover:text-white"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
               <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
@@ -120,15 +119,15 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
 
         <button
           type="submit"
-          className="w-full bg-primary hover:bg-blue-500 hover:scale-102 duration-300 text-white font-bold py-2 px-4 mt-4 rounded transition-all cursor-pointer"
+          className="text-xl bg-primary hover:bg-primary-hover hover:scale-102 duration-300 font-bold py-2 rounded-full transition-all cursor-pointer mt-4 "
         >
           Iniciar Sesion
         </button>
-        <label htmlFor="" className="text-white text-center block mt-2">
+        <label htmlFor="" className="text-white text-center block mt-3">
           Si aun no tienes una cuenta <br />{" "}
           <button
             onClick={() => setShowRegisterForm(true)}
-            className="text-green-500 hover:text-green-700 cursor-pointer"
+            className="text-primary hover:text-primary-hover cursor-pointer transition-colors"
           >
             Registrate aquí
           </button>

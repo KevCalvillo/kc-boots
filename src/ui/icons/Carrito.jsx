@@ -3,7 +3,7 @@ export default function Cart1(props) {
     <svg
       className={props.className}
       viewBox="0 0 24 24"
-      fill="#ffffff"
+      stroke="#ffffff"
       xmlns="http://www.w3.org/2000/svg"
       transform="rotate(0 0 0)"
     >

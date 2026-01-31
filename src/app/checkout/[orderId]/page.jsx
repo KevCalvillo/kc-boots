@@ -3,7 +3,6 @@ import CheckoutForm from "@/forms/Checkout";
 import { CheckCircle, CreditCard, Truck } from "lucide-react";
 
 export default async function CheckoutPage({ params }) {
-
   const { orderId } = await params;
 
   const order = await prisma.order.findUnique({
@@ -27,17 +26,19 @@ export default async function CheckoutPage({ params }) {
       <div className="container mx-auto px-4 lg:px-10">
         {/* HEADER Y PROGRESS BAR */}
         <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-10">
-          <h1 className="text-6xl md:text-8xl font-rancho">
-            CHECKOUT
+          <h1 className="text-9xl md:text-9xl font-rancho">
+            Checkout<p className="text-2xl text-primary tracking-widest">Ya casi son tuyas, un ultimo paso.</p>
           </h1>
-
-          
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* COLUMNA IZQUIERDA: FORMULARIO (Ocupa 7 columnas) */}
           <div className="lg:col-span-7">
-            <CheckoutForm orderId={orderId} total={total} orderUserId={order.userId} />
+            <CheckoutForm
+              orderId={orderId}
+              total={total}
+              orderUserId={order.userId}
+            />
           </div>
 
           {/* COLUMNA DERECHA: RESUMEN (Ocupa 5 columnas y es Sticky) */}

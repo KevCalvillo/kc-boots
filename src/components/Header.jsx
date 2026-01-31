@@ -30,8 +30,7 @@ export default function Header({
   }, []);
 
   function handleCartClick() {
-    // Permitir abrir el carrito incluso si está vacío para que vean que no hay nada
-    // O mantener tu lógica actual si prefieres el aviso
+    
     if (cart.length === 0) {
       Swal.fire({
         title: "Tu carrito está vacío",
@@ -50,8 +49,8 @@ export default function Header({
 
   const navLinks = [
     { name: "Inicio", path: "/" },
-    { name: "Catálogo", path: "/boots" }, // Corregido acento
-    { name: "Historia", path: "/about" }, // "Historia" suena más premium que "Información"
+    { name: "Catálogo", path: "/boots" }, 
+    { name: "Historia", path: "/about" }, 
   ];
 
   return (
@@ -60,13 +59,13 @@ export default function Header({
       ${
         isScrolled
           ? "bg-black/80 backdrop-blur-md py-2 border-b border-white/10"
-          : "bg-transparent mt-4" // Margen superior solo cuando está arriba
+          : "bg-transparent mt-4" 
       }`}
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         {/* IZQUIERDA: Navegación */}
         <nav className="flex-1">
-          <ul className="flex items-center gap-8 text-xl font-rancho tracking-wide text-white">
+          <ul className="flex items-center gap-8 text-2xl font-rancho tracking-widest text-white">
             {navLinks.map((link) => (
               <li key={link.path} className="group relative">
                 <Link
@@ -139,10 +138,10 @@ export default function Header({
                 onClick={handleCartClick}
                 className="relative hover:text-primary transition-colors hover:scale-110 duration-300"
               >
-                <Cart1 className="w-7 h-7 fill-current" />
+                <Cart1 className="w-7 h-7 stroke-current" />
                 {/* BADGE DE CARRITO */}
                 {cart.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border border-black font-roboto">
+                  <span className="absolute -top-3 -right-3 bg-red-800 text-white text-[15px] font-bold w-6 h-6 flex items-center justify-center rounded-full border border-black font-roboto">
                     {cart.length}
                   </span>
                 )}

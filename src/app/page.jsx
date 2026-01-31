@@ -76,6 +76,7 @@ function HomePage() {
 
   return (
     <>
+      {/* HERO SECTION */}
       <section className="h-screen flex flex-col relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-black to-transparent z-10"></div>
         <video
@@ -128,12 +129,12 @@ function HomePage() {
                   setModalOpen(true);
                   setShowRegisterForm(true);
                 }}
-                className="text-2xl bg-primary hover:bg-primary-hover hover:scale-105 duration-300 font-bold py-3 px-8 rounded-full transition-all cursor-pointer shadow-lg"
+                className="text-2xl bg-primary hover:bg-primary-hover text-black hover:scale-105 duration-300 font-bold py-3 px-8 rounded-full transition-all cursor-pointer shadow-lg"
               >
                 Registrarme
               </button>
               <button className="text-2xl bg-secondary/40 backdrop-blur-md hover:bg-secondary-hover hover:scale-102 duration-300 font-bold py-3 px-8 rounded-full transition-all border border-white/20">
-                <Link href="/boots">Explora Nuestro Catálogo</Link>
+                <Link href="/boots">Explorar Nuestro Catálogo</Link>
               </button>
             </motion.div>
           </motion.div>
@@ -141,7 +142,7 @@ function HomePage() {
 
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-[#000000] to-transparent z-10"></div>
       </section>
-
+      {/* BENEFICIOS */}
       <section className="py-20 border-y">
         <motion.div
           initial="hidden"
@@ -218,7 +219,7 @@ function HomePage() {
 
           <motion.div variants={fadeInUp} className="text-center mt-20">
             <Link href="/boots">
-              <button className="text-2xl bg-primary hover:bg-primary-hover hover:scale-105 cursor-pointer text-white font-roboto font-bold py-4 px-10 rounded-full transition-all inline-flex items-center gap-4 shadow-xl">
+              <button className="text-2xl bg-primary hover:bg-primary-hover hover:scale-105 cursor-pointer font-roboto font-bold py-4 px-10 rounded-full transition-all inline-flex items-center gap-4 shadow-xl">
                 Ver Todo el Catálogo
                 <ArrowRight className="w-7 h-7" />
               </button>
@@ -259,7 +260,7 @@ function HomePage() {
           <motion.h2
             variants={slideInRight}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-8xl font-bold text-white leading-tight font-rancho"
+            className="text-5xl md:text-8xl text-white leading-tight font-rancho"
           >
             Tradición en <br /> Cada Costura
           </motion.h2>
@@ -276,7 +277,7 @@ function HomePage() {
             variants={slideInRight}
             whileHover={{ scale: 1.05 }}
             onClick={() => setVideoModalOpen(true)}
-            className="text-xl font-roboto cursor-pointer mt-10 bg-white/10 hover:bg-primary backdrop-blur-sm w-fit px-10 py-3 rounded-full text-white font-bold transition-all border border-white/20"
+            className="text-xl font-roboto cursor-pointer mt-10 hover:text-bgprimary bg-white/10 hover:bg-primary backdrop-blur-sm w-fit px-10 py-3 rounded-full text-white font-bold transition-all duration-300 border border-white/20"
           >
             Conoce el proceso
           </motion.button>
@@ -317,7 +318,7 @@ function HomePage() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-7xl font-rancho text-white mb-6"
+            className="text-8xl font-rancho text-white mb-6"
           >
             Ingeniería Artesanal
           </motion.h2>
@@ -352,7 +353,7 @@ function HomePage() {
               key={index}
               variants={scaleIn}
               whileHover={{ y: -10 }}
-              className="bg-stone-900/40 p-12 rounded-[2rem] border border-stone-800 hover:border-primary transition-all duration-500"
+              className="bg-stone-900/40 p-12 rounded-[2rem] text-center border border-stone-800 hover:border-primary transition-all duration-500"
             >
               <div className="mb-8 inline-block p-5 bg-primary/10 rounded-2xl">
                 <feature.icon className="w-10 h-10 text-primary" />
@@ -369,7 +370,7 @@ function HomePage() {
       </section>
 
       {/* NÚMEROS/ESTADÍSTICAS */}
-      <section className="py-32 bg-gradient-to-b from-black via-stone-900 to-black">
+      <section className="py-38 bg-gradient-to-b from-black via-stone-900 to-black">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -379,7 +380,7 @@ function HomePage() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-6xl font-bold text-white text-center mb-20 font-rancho"
+            className="text-8xl  text-white text-center mb-20 font-rancho"
           >
             Nuestra Historia en Números
           </motion.h2>
@@ -392,10 +393,10 @@ function HomePage() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-12 bg-black/50 rounded-3xl border border-white/5"
+                className="text-center p-12 bg-black/70 rounded-3xl border border-white/5"
               >
-                <stat.icon className="w-10 h-10 text-primary mx-auto mb-6 opacity-50" />
-                <h3 className="text-6xl font-bold text-white mb-2">
+                <stat.icon className="w-10 h-10 text-primary mx-auto mb-6 " />
+                <h3 className="text-5xl font-bold text-white mb-2">
                   {stat.num}
                 </h3>
                 <p className="text-stone-500 text-lg uppercase tracking-widest">
@@ -418,9 +419,9 @@ function HomePage() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-6xl font-bold text-white text-center mb-20 font-rancho"
+            className="text-8xl  text-white text-center mb-20 font-rancho"
           >
-            Lo Que Dicen Nuestros Clientes
+            Calidad que nos Respalda
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
@@ -482,7 +483,8 @@ function HomePage() {
           variants={fadeInUp}
           className="container mx-auto text-center px-10 relative z-10 font-roboto"
         >
-          <h2 className="text-7xl md:text-8xl font-rancho text-white mb-10 leading-tight">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
+          <h2 className="text-8xl md:text-8xl font-rancho text-white mb-10 leading-tight relative">
             ¿Listo Para Tu <br /> Próximo Par?
           </h2>
           <p className="text-stone-400 text-2xl mb-16 max-w-3xl mx-auto font-light leading-relaxed">
@@ -495,7 +497,7 @@ function HomePage() {
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(161, 128, 70, 0.4)",
               }}
-              className="text-2xl bg-primary text-white font-bold py-5 px-14 rounded-full transition-all"
+              className="text-2xl bg-primary font-bold py-5 px-14 rounded-full cursor-pointer duration-300 transition-all"
             >
               <Link href="/boots">Ver Catálogo Completo</Link>
             </motion.button>
@@ -504,7 +506,7 @@ function HomePage() {
                 setModalOpen(true);
                 setShowRegisterForm(true);
               }}
-              className="text-2xl bg-transparent border-2 border-stone-700 hover:border-primary text-white font-bold py-5 px-14 rounded-full transition-all"
+              className="text-2xl bg-stone-700/40 border-2 cursor-pointer border-stone-700 hover:border-primary text-white font-bold py-5 px-14 rounded-full transition-all"
             >
               Crear Cuenta Gratis
             </motion.button>
