@@ -1,13 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // Usamos Image de Next
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import Exit from "@/ui/icons/Exit";
 import LogIn from "@/ui/icons/LogIn";
 import User from "@/ui/icons/User";
 import Cart1 from "@/ui/icons/Carrito";
-import { Search, X } from "lucide-react"; // Iconos para la búsqueda
+import { Search, X } from "lucide-react";
 import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,7 +20,6 @@ export default function Header({
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Efecto para detectar el scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -62,8 +61,7 @@ export default function Header({
           : "bg-transparent mt-4" 
       }`}
     >
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        {/* IZQUIERDA: Navegación */}
+      <div className="max-w-350 mx-auto flex items-center justify-between">
         <nav className="flex-1">
           <ul className="flex items-center gap-8 text-2xl font-rancho tracking-widest text-white">
             {navLinks.map((link) => (
@@ -74,15 +72,14 @@ export default function Header({
                 >
                   {link.name}
                 </Link>
-                {/* Línea animada debajo del link */}
+                
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* CENTRO: Logo */}
-        <div className="flex-shrink-0 mx-4">
+        <div className="shrink-0 mx-4">
           <Link href="/">
             <div
               className={`relative transition-all duration-500 ${isScrolled ? "w-16" : "w-24"}`}
@@ -99,9 +96,7 @@ export default function Header({
           </Link>
         </div>
 
-        {/* DERECHA: Acciones e Iconos */}
         <div className="flex-1 flex items-center justify-end gap-6 text-white">
-          {/* Barra de Búsqueda Animada */}
           <div className="relative flex items-center">
             <AnimatePresence>
               {isSearchOpen && (
@@ -124,7 +119,6 @@ export default function Header({
             </button>
           </div>
 
-          {/* Iconos de Usuario y Carrito */}
           {user ? (
             <>
               <button
@@ -139,7 +133,7 @@ export default function Header({
                 className="relative hover:text-primary transition-colors hover:scale-110 duration-300"
               >
                 <Cart1 className="w-7 h-7 stroke-current" />
-                {/* BADGE DE CARRITO */}
+              
                 {cart.length > 0 && (
                   <span className="absolute -top-3 -right-3 bg-red-800 text-white text-[15px] font-bold w-6 h-6 flex items-center justify-center rounded-full border border-black font-roboto">
                     {cart.length}

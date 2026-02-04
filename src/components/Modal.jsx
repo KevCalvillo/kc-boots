@@ -7,7 +7,6 @@ export default function Modal({ isOpen, onClose, children }) {
   const [show, setShow] = useState(isOpen);
   const onCloseRef = useRef(onClose);
 
-  // Mantener la referencia actualizada
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);

@@ -110,9 +110,9 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
             className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-400 hover:text-white"
           >
             {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
+              <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
             ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-green-500 hover:scale-110 transition-all duration-300 cursor-pointer" />
+              <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
             )}
           </button>
         </div>

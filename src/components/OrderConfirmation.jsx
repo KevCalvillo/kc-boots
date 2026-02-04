@@ -41,8 +41,7 @@ export default function OrderConfirmation({ orderId, total }) {
 
   return (
     <section className="min-h-screen bg-[#050505] flex items-center justify-center py-10 mt-10 font-roboto relative overflow-hidden">
-      {/* Efecto de fondo sutil (un brillo dorado detrás) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 bg-primary/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
       <motion.div
         variants={containerVariants}
@@ -50,7 +49,6 @@ export default function OrderConfirmation({ orderId, total }) {
         animate="visible"
         className="bg-[#121212] p-5 md:p-8 rounded-[3rem] border border-stone-800 text-center max-w-2xl w-full h-fit shadow-2xl relative z-10 backdrop-blur-sm"
       >
-        {/* 1. ÍCONO DE ÉXITO */}
         <motion.div
           variants={iconVariants}
           className="mb-8 flex justify-center"
@@ -60,7 +58,6 @@ export default function OrderConfirmation({ orderId, total }) {
           </div>
         </motion.div>
 
-        {/* 2. TÍTULO PRINCIPAL */}
         <motion.h1
           variants={itemVariants}
           className="font-rancho text-5xl md:text-7xl text-white mb-6"
@@ -68,7 +65,6 @@ export default function OrderConfirmation({ orderId, total }) {
           ¡Gracias por tu compra!
         </motion.h1>
 
-        {/* 3. MENSAJE DE CONFIRMACIÓN */}
         <motion.p
           variants={itemVariants}
           className="text-stone-400 text-lg mb-12 leading-relaxed"
@@ -77,7 +73,6 @@ export default function OrderConfirmation({ orderId, total }) {
           taller. Pronto recibirás un correo con los detalles de seguimiento.
         </motion.p>
 
-        {/* 4. CAJA DE DETALLES DE LA ORDEN */}
         <motion.div
           variants={itemVariants}
           className="bg-stone-900/50 border border-stone-800 rounded-3xl p-8 mb-12"
@@ -87,13 +82,11 @@ export default function OrderConfirmation({ orderId, total }) {
               <p className="text-stone-500 text-sm uppercase tracking-widest mb-2">
                 Número de Orden
               </p>
-              {/* Usamos font-mono para que el ID parezca un ticket o código */}
               <p className="text-white text-lg font-mono font-bold tracking-wider">
                 #{orderId}
               </p>
             </div>
 
-            {/* Divisor en móvil */}
             <div className="w-20 h-px bg-stone-800 md:hidden"></div>
             <div className="h-20 w-px bg-stone-800 hidden md:block"></div>
 
@@ -102,7 +95,6 @@ export default function OrderConfirmation({ orderId, total }) {
                 Total Pagado
               </p>
               <p className="text-primary text-2xl font-bold">
-                {/* Formateamos el total a moneda */}
                 {new Intl.NumberFormat("es-MX", {
                   style: "currency",
                   currency: "MXN",
@@ -112,7 +104,6 @@ export default function OrderConfirmation({ orderId, total }) {
           </div>
         </motion.div>
 
-        {/* 5. BOTONES DE ACCIÓN */}
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4 justify-center"

@@ -12,7 +12,6 @@ const Footer = () => {
   return (
     <footer className="bg-black border-t border-stone-900 pt-20 pb-10 px-10 font-roboto">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-        {/* COLUMNA 1: BRANDING */}
         <div className="flex flex-col gap-6">
           <h2 className="font-rancho text-5xl text-white">KC Boots</h2>
           <p className="text-stone-500 text-lg leading-relaxed">
@@ -27,7 +26,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* COLUMNA 2: ENLACES RÁPIDOS */}
         <div className="flex flex-col gap-6">
           <h3 className="text-white text-xl font-bold uppercase tracking-widest">
             Navegación
@@ -48,7 +46,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* COLUMNA 3: CONTACTO */}
         <div className="flex flex-col gap-6">
           <h3 className="text-white text-xl font-bold uppercase tracking-widest">
             Contacto
@@ -60,16 +57,15 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-3">
               <Phone className="text-primary w-5 h-5" />
-              +52 (477) 123 4567
+              +52 (449) 217 9211
             </li>
             <li className="flex items-center gap-3">
               <Mail className="text-primary w-5 h-5" />
-              ventas@kcboots.com
+              kevincalvillo26@gmail.com
             </li>
           </ul>
         </div>
 
-        {/* COLUMNA 4: NEWSLETTER (ESTILO PREMIUM) */}
         <div className="flex flex-col gap-6">
           <h3 className="text-white text-xl font-bold uppercase tracking-widest">
             Únete al Gremio
@@ -93,7 +89,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* LÍNEA FINAL DE COPYRIGHT */}
       <div className="container mx-auto pt-10 border-t border-stone-900 flex flex-col md:row justify-between items-center gap-4 text-stone-600 text-sm">
         <p>© 2026 KC Boots - Todos los derechos reservados.</p>
         <div className="flex gap-8">
