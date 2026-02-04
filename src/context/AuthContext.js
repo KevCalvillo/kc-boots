@@ -1,6 +1,7 @@
 "use client";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useCart } from "@/hooks/useCart";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const AuthContext = createContext();
 
@@ -11,6 +12,21 @@ export function AuthProvider({ children }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   const cartLogic = useCart();
+  const favoritesLogic = useFavorites();
+
+  // Cargar favoritos cuando el usuario cambia
+  useEffect(() => {
+    if (user?.id) {
+      favoritesLogic.fetchFavorites(user.id);
+    } else {
+      favoritesLogic.clearFavorites();
+    }
+  }, [user?.id]);
+
+  // Wrapper para toggle que incluye el userId
+  const toggleFavoriteWithUser = (product) => {
+    return favoritesLogic.toggleFavorite(product, user?.id);
+  };
 
   return (
     <AuthContext.Provider
@@ -23,7 +39,9 @@ export function AuthProvider({ children }) {
         setShowRegisterForm,
         cartModalOpen,
         setCartModalOpen,
-        ...cartLogic, 
+        ...cartLogic,
+        ...favoritesLogic,
+        toggleFavorite: toggleFavoriteWithUser,
       }}
     >
       {children}

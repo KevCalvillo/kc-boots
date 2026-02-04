@@ -125,7 +125,9 @@ export default function Header({
                 title="Mi Perfil"
                 className="hover:text-primary transition-colors hover:scale-110 duration-300"
               >
-                <User className="w-7 h-7 fill-current" />
+                <Link href="/profile">
+                  <User className="w-7 h-7 fill-current" />
+                </Link>
               </button>
 
               <button

@@ -23,11 +23,17 @@ model User {
   id String @id @default(uuid())
   email String @unique
   name String?
+  phone String?
+  address String?
+  city String?
+  state String?
+  zip String?
   password String
   role Role @default(CUSTOMER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders Order[]
+  favorites Favorite[]
 }
 
 model Product{
@@ -41,12 +47,11 @@ model Product{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relaciones 
-
   category Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
 
   orderItems OrderItem[]
+  favorites Favorite[]
 }
 
 model Category{
@@ -76,4 +81,16 @@ model OrderItem{
 
   order Order @relation(fields: [orderId], references: [id])
   product Product @relation(fields: [productId], references: [id])
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
 }

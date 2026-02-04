@@ -1,12 +1,18 @@
 import Plus from "@/ui/icons/Add";
 import { useAuth } from "@/context/AuthContext";
 import Heart from "@/ui/icons/Heart";
-export default function BootCard({ bota }) {
-  const { addToCart, user, setModalOpen, setShowRegisterForm } = useAuth();
 
-  function handleAddToFavorites(id){
-    console.log('se agrego a favoritos '+id)
-  }
+export default function BootCard({ bota }) {
+  const {
+    addToCart,
+    user,
+    setModalOpen,
+    setShowRegisterForm,
+    toggleFavorite,
+    isFavorite,
+  } = useAuth();
+
+  const isInFavorites = isFavorite(bota.id);
 
   function verificaUser(product) {
     if (user) {
@@ -16,6 +22,7 @@ export default function BootCard({ bota }) {
       setShowRegisterForm(false);
     }
   }
+
   return (
     <div className="h-full flex flex-col max-w-xs rounded-3xl overflow-hidden shadow-2xl transition-all hover:scale-[1.02] duration-300">
       <div className="relative bg-linear-to-br from-stone-400 to-stone-200 flex items-center justify-center p-10">
@@ -24,8 +31,10 @@ export default function BootCard({ bota }) {
           className="w-full h-60 object-contain transform"
           alt={bota.title}
         />
-        <button onClick={()=>handleAddToFavorites(bota.id)}>
-          <Heart className="absolute top-8 right-8 w-10 h-10 cursor-pointer hover:scale-110 transition-transform z-20 fill-[#95812f] " />
+        <button onClick={() => toggleFavorite(bota)}>
+          <Heart
+            className={`absolute top-8 right-8 w-10 h-10 cursor-pointer hover:scale-110 transition-transform z-20 stroke-2 stroke-[#95812f] ${isInFavorites ? "fill-primary" : "fill-transparent"}`}
+          />
         </button>
       </div>
 
