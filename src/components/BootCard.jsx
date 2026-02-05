@@ -12,6 +12,16 @@ export default function BootCard({ bota }) {
     isFavorite,
   } = useAuth();
 
+  
+  function verificaFavoritos(bota){
+    if(user){
+      toggleFavorite(bota);
+    }else{
+      setModalOpen(true);
+      setShowRegisterForm(false);
+    }
+  }
+
   const isInFavorites = isFavorite(bota.id);
 
   function verificaUser(product) {
@@ -31,7 +41,7 @@ export default function BootCard({ bota }) {
           className="w-full h-60 object-contain transform"
           alt={bota.title}
         />
-        <button onClick={() => toggleFavorite(bota)}>
+        <button onClick={() => verificaFavoritos(bota)}>
           <Heart
             className={`absolute top-8 right-8 w-10 h-10 cursor-pointer hover:scale-110 transition-transform z-20 stroke-2 stroke-[#95812f] ${isInFavorites ? "fill-primary" : "fill-transparent"}`}
           />

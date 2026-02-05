@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../libs/prisma";
 
-// GET: Obtener favoritos de un usuario
+
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
