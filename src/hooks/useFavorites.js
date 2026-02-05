@@ -4,7 +4,6 @@ export function useFavorites() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Cargar favoritos del servidor
   const fetchFavorites = useCallback(async (userId) => {
     if (!userId) {
       setFavorites([]);
@@ -25,10 +24,8 @@ export function useFavorites() {
     }
   }, []);
 
-  // Agregar a favoritos (en servidor y estado local)
   const addToFavorites = async (product, userId) => {
     if (!userId) {
-      // Si no hay usuario, solo agregar localmente
       setFavorites((prev) => [...prev, product]);
       return;
     }
@@ -49,9 +46,7 @@ export function useFavorites() {
     }
   };
 
-  // Quitar de favoritos (en servidor y estado local)
   const removeFromFavorites = async (productId, userId) => {
-    // Actualizar estado local inmediatamente
     setFavorites((prev) => prev.filter((item) => item.id !== productId));
 
     if (!userId) return;
@@ -65,12 +60,10 @@ export function useFavorites() {
     }
   };
 
-  // Verificar si un producto está en favoritos
   const isFavorite = (productId) => {
     return favorites.some((item) => item.id === productId);
   };
 
-  // Toggle favorito
   const toggleFavorite = async (product, userId) => {
     if (isFavorite(product.id)) {
       await removeFromFavorites(product.id, userId);
@@ -79,7 +72,6 @@ export function useFavorites() {
     }
   };
 
-  // Limpiar favoritos (para logout)
   const clearFavorites = () => {
     setFavorites([]);
   };

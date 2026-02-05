@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import EyeOpen from "../ui/icons/EyeOpen";
-import EyeClosed from "../ui/icons/EyeClosed"; // Usamos Lucide para consistencia con el Login
+import EyeClosed from "../ui/icons/EyeClosed";
 import Google from "../ui/icons/Google";
 import Swal from "sweetalert2";
 import { calcularNivelPassword } from "@/libs/utils";
@@ -11,7 +11,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
   const [nivel, setNivel] = useState(0);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado independiente para confirmar
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   function cleanState() {
     setPassword("");
@@ -76,11 +76,9 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
     const nuevoPassword = e.target.value;
     setPassword(nuevoPassword);
     setNivel(calcularNivelPassword(nuevoPassword));
-    // Resetear error de match si el usuario escribe
     if (!passwordMatch) setPasswordMatch(true);
   }
 
-  // Estilo reutilizable para inputs (Premium Look)
   const inputStyle =
     "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
   const labelStyle = "text-sm text-stone-500 ml-1 block mb-1";
@@ -96,7 +94,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
         </p>
       </div>
 
-      <button className="w-full bg-white text-black hover:bg-stone-200 flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl mb-6 transition-all duration-300 shadow-lg">
+      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl mb-6 transition-all duration-300 shadow-lg">
         <Google className="w-6 h-6" />
         Continuar con Google
       </button>
@@ -108,7 +106,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
       </div>
 
       <form onSubmit={handleOnSubmit} className="flex flex-col gap-4">
-        {/* Nombre */}
         <div>
           <label className={labelStyle}>Nombre</label>
           <input
@@ -120,7 +117,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           />
         </div>
 
-        {/* Email */}
         <div>
           <label className={labelStyle}>Email</label>
           <input
@@ -132,7 +128,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           />
         </div>
 
-        {/* Contraseña */}
         <div>
           <label className={labelStyle}>Contraseña</label>
           <div className="relative w-full">
@@ -158,7 +153,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           </div>
         </div>
 
-        {/* Confirmar Contraseña */}
         <div>
           <label className={labelStyle}>Confirmar contraseña</label>
           <div className="relative w-full">
@@ -183,7 +177,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           </div>
         </div>
 
-        {/* Barra de Fortaleza */}
         <div className="mt-2">
           <div className="flex justify-between items-center mb-1">
             <p className="text-xs text-stone-500">Seguridad de la contraseña</p>
@@ -208,7 +201,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             ></div>
           </div>
 
-          {/* Instrucciones sutiles */}
           {nivel < 3 && (
             <p className="text-stone-600 text-[10px] mt-1 leading-tight">
               Usa símbolos, números y mayúsculas para mejorar la seguridad.
@@ -216,7 +208,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           )}
         </div>
 
-        {/* Botón de Registro */}
         <button
           type="submit"
           disabled={nivel < 3}
@@ -225,7 +216,6 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           Crear Cuenta
         </button>
 
-        {/* Link a Login */}
         <div className="text-center mt-2">
           <p className="text-stone-500 text-sm">
             ¿Ya tienes cuenta?{" "}

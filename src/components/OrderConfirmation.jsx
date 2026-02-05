@@ -4,13 +4,12 @@ import { CheckCircle, ShoppingBag, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function OrderConfirmation({ orderId, total }) {
-  // Variantes para la animación de entrada escalonada
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Retraso entre cada elemento
+        staggerChildren: 0.2,
       },
     },
   };
@@ -24,7 +23,6 @@ export default function OrderConfirmation({ orderId, total }) {
     },
   };
 
-  // Animación de "pop" para el ícono de éxito
   const iconVariants = {
     hidden: { scale: 0, opacity: 0 },
     visible: {
@@ -109,14 +107,14 @@ export default function OrderConfirmation({ orderId, total }) {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link href="/boots" className="w-full sm:w-auto">
-            <button className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-1">
+            <button className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover hover:scale-102 font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform">
               <ShoppingBag className="w-5 h-5" />
               Seguir Comprando
             </button>
           </Link>
 
           <Link href="/" className="w-full sm:w-auto">
-            <button className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300">
+            <button className="w-full flex items-center justify-center gap-2 bg-transparent border-2 hover:scale-102 border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300">
               Volver al Inicio
               <ArrowRight className="w-5 h-5" />
             </button>

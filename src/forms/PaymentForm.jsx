@@ -14,9 +14,9 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {cleanCart, user, cart} = useAuth();
+  const { cleanCart, user, cart } = useAuth();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,14 +51,13 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
         body: JSON.stringify({ status: "paid" }),
       });
 
-      // Enviar correo de confirmación
       await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: user.email, // Necesitas obtener el email del usuario
+          email: user.email,
           orderId: orderId,
-          cart: cart, // Necesitas obtener el carrito
+          cart: cart,
           total: total,
         }),
       });
@@ -73,12 +72,14 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="text-4xl font-rancho text-white mb-6 text-center">Método de Pago</h3>
+      <h3 className="text-4xl font-rancho text-white mb-6 text-center">
+        Método de Pago
+      </h3>
       <PaymentElement />
       {error && <p className="text-red-500 mt-4">{error}</p>}
       <button
         disabled={!stripe || isLoading}
-        className="mt-6 w-full bg-primary text-bgprimary font-bold py-4 rounded-full text-xl disabled:opacity-50"
+        className="mt-6 w-full bg-primary text-bgprimary hover:scale-102 font-bold py-4 rounded-full text-xl disabled:opacity-50 transition-all duration-300 transform hover:bg-primary-hover"
       >
         {isLoading ? "Procesando..." : `Pagar $${total.toLocaleString()}`}
       </button>

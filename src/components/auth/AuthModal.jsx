@@ -11,7 +11,6 @@ export default function AuthModal({
   setShowRegisterForm,
 }) {
   return (
-    // CAMBIO CLAVE: w-[95%] para móviles, max-w-5xl para escritorio.
     <Modal
       isOpen={isOpen}
       onClose={onClose}
@@ -35,9 +34,7 @@ export default function AuthModal({
           <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent"></div>
 
           <div className="absolute bottom-12 left-10 right-10 text-white z-10">
-            <h3 className="text-5xl font-rancho mb-4 text-white">
-              Familia KC
-            </h3>
+            <h3 className="text-5xl font-rancho mb-4 text-white">Familia KC</h3>
             <p className="text-stone-300 font-roboto text-lg leading-relaxed">
               Únete a nuestra comunidad de auténticos conocedores y recibe
               acceso exclusivo a preventas.

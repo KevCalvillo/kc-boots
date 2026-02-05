@@ -58,7 +58,6 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
         });
       });
   }
-  // Estilo común para inputs (Igual que en Checkout)
   const inputStyle =
     "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
 
@@ -114,7 +113,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
               className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
             >
               {showPassword ? (
-                  <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+                <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               ) : (
                 <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               )}

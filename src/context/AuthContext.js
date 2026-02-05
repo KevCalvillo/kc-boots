@@ -14,7 +14,6 @@ export function AuthProvider({ children }) {
   const cartLogic = useCart();
   const favoritesLogic = useFavorites();
 
-  // Cargar favoritos cuando el usuario cambia
   useEffect(() => {
     if (user?.id) {
       favoritesLogic.fetchFavorites(user.id);
@@ -23,7 +22,6 @@ export function AuthProvider({ children }) {
     }
   }, [user?.id]);
 
-  // Wrapper para toggle que incluye el userId
   const toggleFavoriteWithUser = (product) => {
     return favoritesLogic.toggleFavorite(product, user?.id);
   };

@@ -6,13 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function AllBoots() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado de carga
+  const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("default");
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     fetch("/api/products")
       .then((res) => res.json())
@@ -23,23 +22,18 @@ function AllBoots() {
       .catch(() => setLoading(false));
   }, []);
 
-  // Lógica de filtrado combinada (Búsqueda + Categoría + Orden)
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // 1. Filtro por Buscador
     if (searchTerm) {
       result = result.filter((p) =>
         p.title.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
-    // 2. Filtro por Categoría
     if (categoryFilter !== "all") {
-      //Logica pra filtrado por categoria
     }
 
-    // 3. Ordenamiento
     switch (sortBy) {
       case "price-asc":
         result.sort((a, b) => Number(a.price) - Number(b.price));
@@ -51,7 +45,7 @@ function AllBoots() {
         result.sort((a, b) => a.title.localeCompare(b.title));
         break;
       default:
-        break; 
+        break;
     }
 
     return result;
@@ -123,7 +117,6 @@ function AllBoots() {
       {/* 3. GRID DE PRODUCTOS */}
       <div className="container mx-auto px-4 md:px-10 py-16 min-h-[50vh]">
         {loading ? (
-          // SKELETON LOADING (Estado de carga)
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <div
@@ -133,7 +126,6 @@ function AllBoots() {
             ))}
           </div>
         ) : filteredProducts.length > 0 ? (
-          // LISTA DE PRODUCTOS CON ANIMACIÓN
           <motion.div
             layout
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12"
@@ -154,7 +146,6 @@ function AllBoots() {
             </AnimatePresence>
           </motion.div>
         ) : (
-          // ESTADO SIN RESULTADOS
           <div className="flex flex-col items-center justify-center py-20 text-stone-500">
             <Search className="w-16 h-16 mb-4 opacity-20" />
             <h3 className="text-2xl font-bold text-stone-400">

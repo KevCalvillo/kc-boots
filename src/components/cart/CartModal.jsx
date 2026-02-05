@@ -20,7 +20,6 @@ export default function CartModal({
   const router = useRouter();
 
   const handleCreateOrder = () => {
-    // ... tu lógica de fetch (se mantiene igual)
     const orderData = {
       userId: user.id,
       total: total,
@@ -60,7 +59,7 @@ export default function CartModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="w-full max-w-4xl font-roboto">
+      <div className="w-full font-roboto p-10">
         {/* HEADER DEL MODAL */}
         <div className="flex items-center justify-between mb-8 border-b border-stone-800 pb-4">
           <h2 className="text-4xl text-white font-rancho flex items-center gap-3">
@@ -132,18 +131,16 @@ export default function CartModal({
                 </div>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 onClick={handleCreateOrder}
-                className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all mb-3"
+                className="w-full bg-primary hover:bg-primary-hover hover:scale-102 font-bold py-4 rounded-xl shadow-lg transition-all mb-3"
               >
                 Proceder al Pago
-              </motion.button>
+              </button>
 
               <button
                 onClick={onClose}
-                className="w-full text-stone-500 hover:text-white transition-colors text-sm"
+                className="w-full text-stone-500 hover:text-white hover:scale-102 transition-colors text-sm"
               >
                 Continuar comprando
               </button>

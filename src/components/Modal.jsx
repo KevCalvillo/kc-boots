@@ -39,11 +39,8 @@ export default function Modal({ isOpen, onClose, children, className }) {
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            // CAMBIO CLAVE: Quitamos 'w-fit' por defecto si existe className
-            // Agregamos 'max-w-full' para evitar desbordes en móviles
-            className={`bg-[#121212] relative rounded-3xl shadow-2xl border border-stone-800 overflow-hidden flex flex-col ${className ? className : "w-fit"} max-h-[90vh] max-w-full`}
+            className={`bg-[#121212] relative rounded-3xl shadow-2xl border border-stone-800 overflow-hidden flex flex-col ${className ? className : "w-fit"} max-h-[95vh] max-w-full`}
           >
-            {/* BOTÓN DE CERRAR AJUSTADO */}
             <button
               onClick={handleClose}
               className="absolute top-4 right-4 z-[60] p-2 bg-black/40 hover:bg-red-500/20 rounded-full text-stone-400 hover:text-white backdrop-blur-md transition-all duration-300"

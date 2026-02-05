@@ -8,11 +8,9 @@ export async function POST(req) {
 
     const order = await prisma.order.create({
       data: {
-        // campos directos de Order
         userId: userId,
         total: total,
 
-        // relación con OrderItems
         orderItems: {
           create: orderItems,
         },
@@ -58,4 +56,3 @@ export async function GET(req) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
-

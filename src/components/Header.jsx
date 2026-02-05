@@ -125,7 +125,7 @@ export default function Header({
                 className="hover:text-primary transition-colors hover:scale-110 duration-300"
               >
                 <Link href="/profile">
-                  <User className="w-7 h-7 fill-current" />
+                  <User className="w-7 h-7" />
                 </Link>
               </button>
 
@@ -133,7 +133,7 @@ export default function Header({
                 onClick={handleCartClick}
                 className="relative hover:text-primary transition-colors hover:scale-110 duration-300"
               >
-                <Cart1 className="w-7 h-7 stroke-current" />
+                <Cart1 className="w-7 h-7" />
               
                 {cart.length > 0 && (
                   <span className="absolute -top-3 -right-3 bg-red-800 text-white text-[15px] font-bold w-6 h-6 flex items-center justify-center rounded-full border border-black font-roboto">

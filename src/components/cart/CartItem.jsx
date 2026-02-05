@@ -12,7 +12,7 @@ export default function CartItem({ item, onDecrease, onIncrease, onRemove }) {
       className="flex gap-4 p-4 mb-4 bg-[#1a1a1a] rounded-2xl border border-stone-800 hover:border-stone-700 transition-colors group"
     >
       {/* IMAGEN DEL PRODUCTO */}
-      <div className="w-24 h-24 bg-gradient-to-br from-stone-800 to-stone-900 rounded-xl p-2 flex items-center justify-center flex-shrink-0">
+      <div className="w-24 h-24 bg-gradient-to-br from-stone-200 to-stone-500 rounded-xl p-2 flex items-center justify-center flex-shrink-0">
         <img
           src={item.imageUrl}
           alt={item.title}
