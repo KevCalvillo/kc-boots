@@ -80,7 +80,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
   }
 
   const inputStyle =
-    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
+    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
   const labelStyle = "text-sm text-stone-500 ml-1 block mb-1";
 
   return (
@@ -94,7 +94,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
         </p>
       </div>
 
-      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl mb-6 transition-all duration-300 shadow-lg">
+      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-full mb-6 transition-all duration-300 shadow-lg">
         <Google className="w-6 h-6" />
         Continuar con Google
       </button>
@@ -211,7 +211,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
         <button
           type="submit"
           disabled={nivel < 3}
-          className="mt-2 text-lg bg-primary hover:bg-primary-hover font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          className="mt-2 text-lg bg-primary hover:bg-primary-hover hover:scale-102 disabled:opacity-50 disabled:scale-100 disabled:hover:bg-primary font-bold py-3 rounded-full transition-all shadow-lg duration-300"
         >
           Crear Cuenta
         </button>
@@ -222,7 +222,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             <button
               type="button"
               onClick={() => setShowRegisterForm(false)}
-              className="text-primary hover:text-white font-bold transition-colors underline decoration-primary/50"
+              className="text-primary hover:text-white font-bold transition-colors"
             >
               Inicia sesión aquí
             </button>

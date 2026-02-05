@@ -48,7 +48,7 @@ export default async function CheckoutPage({ params }) {
               <div className="max-h-[400px] overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-6">
                 {order.orderItems.map((item) => (
                   <div key={item.id} className="flex gap-4 items-start">
-                    <div className="bg-stone-800/50 p-2 rounded-xl border border-stone-700 min-w-[80px]">
+                    <div className="w-20 h-20 bg-gradient-to-br from-stone-200 to-stone-500 rounded-xl p-2 flex items-center justify-center shrink-0">
                       <img
                         src={item.product.imageUrl}
                         className="w-16 h-16 object-contain"
@@ -62,8 +62,11 @@ export default async function CheckoutPage({ params }) {
                       <p className="text-stone-400 text-sm mt-1">
                         Cant: {item.quantity}
                       </p>
+                      <p className="text-stone-400 text-sm mt-1">
+                        Talla: 27 MX
+                      </p>
                     </div>
-                    <div className="text-right font-mono font-bold text-lg">
+                    <div className="text-right font-mono font-bold text-lg text-stone-400">
                       ${Number(item.price).toLocaleString()}
                     </div>
                   </div>

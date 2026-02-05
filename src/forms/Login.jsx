@@ -59,7 +59,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
       });
   }
   const inputStyle =
-    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
+    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
 
   return (
     <div className="font-roboto">
@@ -70,7 +70,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
         </p>
       </div>
 
-      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl mb-6 transition-all duration-300 shadow-lg">
+      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-full mb-6 transition-all duration-300 shadow-lg">
         <Google className="w-6 h-6" />
         Continuar con Google
       </button>
@@ -110,7 +110,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
+              className="absolute top-1/2 right-5 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
             >
               {showPassword ? (
                 <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
@@ -123,7 +123,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
 
         <button
           type="submit"
-          className="mt-2 text-xl bg-primary hover:bg-primary-hover font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-1"
+          className="mt-2 text-xl bg-primary hover:bg-primary-hover font-bold py-3 rounded-full transition-all shadow-lg hover:scale-102"
         >
           Iniciar Sesión
         </button>
@@ -134,7 +134,7 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
             <button
               type="button"
               onClick={() => setShowRegisterForm(true)}
-              className="text-primary hover:text-white font-bold transition-colors underline decoration-primary/50"
+              className="text-primary hover:text-white font-bold transition-colors"
             >
               Regístrate aquí
             </button>

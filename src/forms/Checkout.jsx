@@ -200,9 +200,9 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
               </div>
             </div>
 
-            <hr className="border-stone-800" />
+            <hr className="border-stone-800 my-6" />
 
-            <div>
+            <div className="mt-4">
               <h3 className="text-3xl font-rancho text-white mb-6">
                 Dirección de Envío
               </h3>
@@ -318,9 +318,9 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
               </div>
             </div>
 
-            <hr className="border-stone-800" />
+            <hr className="border-stone-800 my-6" />
 
-            <div>
+            <div className="mt-4">
               <h3 className="text-3xl font-rancho text-white mb-6">
                 Método de Envío
               </h3>
