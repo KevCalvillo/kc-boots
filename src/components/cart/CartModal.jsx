@@ -1,9 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Modal from "../Modal";
-import CartTable from "./CartTable";
+import CartItem from "./CartItem";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { ShoppingBag, X } from "lucide-react";
 
 export default function CartModal({
   isOpen,
@@ -17,13 +18,9 @@ export default function CartModal({
   const { getCartTotal, user } = useAuth();
   const total = getCartTotal();
   const router = useRouter();
-  const handleCancel = () => {
-    onCancel();
-    onClose();
-  };
 
   const handleCreateOrder = () => {
-
+    // ... tu lógica de fetch (se mantiene igual)
     const orderData = {
       userId: user.id,
       total: total,
@@ -41,7 +38,7 @@ export default function CartModal({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(orderData)
+      body: JSON.stringify(orderData),
     })
       .then(async (res) => {
         if (!res.ok) {
@@ -52,7 +49,7 @@ export default function CartModal({
       })
       .then((order) => {
         onClose();
-        router.push(`/checkout/${order.id}`)
+        router.push(`/checkout/${order.id}`);
       })
       .catch((error) => {
         console.log(error);
@@ -63,76 +60,97 @@ export default function CartModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      {isEmpty ? (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center text-white text-2xl px-20 py-10"
-        >
-          <h1>Carrito Vacío</h1>
-          <p className="text-stone-400 text-lg mt-2">
-            Agrega productos al carrito.
-          </p>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="p-10"
-        >
-          <CartTable
-            cart={cart}
-            onDecrease={onDecrease}
-            onIncrease={onIncrease}
-            onRemove={onRemove}
-          />
+      <div className="w-full max-w-4xl font-roboto">
+        {/* HEADER DEL MODAL */}
+        <div className="flex items-center justify-between mb-8 border-b border-stone-800 pb-4">
+          <h2 className="text-4xl text-white font-rancho flex items-center gap-3">
+            <ShoppingBag className="w-8 h-8 text-primary" />
+            Tu Carrito{" "}
+            <span className="text-stone-500 text-lg font-roboto font-normal">
+              ({cart.length} items)
+            </span>
+          </h2>
+        </div>
 
+        {isEmpty ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="mt-8 pt-6 border-t border-stone-600"
+            className="flex flex-col items-center justify-center py-20 text-center"
           >
-            <div className="flex justify-end gap-5 items-center text-white text-3xl font-bold mb-6">
-              <span>Total:</span>
-              <motion.span
-                key={total}
-                initial={{ scale: 1.2 }}
-                animate={{ scale: 1 }}
-                className="text-green-700"
-              >
-                ${total.toFixed(2)} MXN
-              </motion.span>
+            <div className="w-24 h-24 bg-stone-900 rounded-full flex items-center justify-center mb-6">
+              <ShoppingBag className="w-10 h-10 text-stone-600" />
             </div>
+            <h3 className="text-2xl text-white font-bold mb-2">
+              Tu carrito está vacío
+            </h3>
+            <p className="text-stone-400 mb-8">
+              Parece que aún no has elegido tu par perfecto.
+            </p>
+            <button onClick={onClose} className="text-primary hover:underline">
+              Seguir explorando
+            </button>
           </motion.div>
+        ) : (
+          <div className="flex flex-col lg:flex-row gap-10">
+            {/* LISTA DE PRODUCTOS (SCROLLABLE) */}
+            <div className="flex-1 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+              <AnimatePresence mode="popLayout">
+                {cart.map((item) => (
+                  <CartItem
+                    key={item.id}
+                    item={item}
+                    onDecrease={onDecrease}
+                    onIncrease={onIncrease}
+                    onRemove={onRemove}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="flex items-center justify-center gap-10"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleCancel}
-              className="text-2xl bg-red-700 hover:bg-red-900 text-white font-bold py-3 px-6 rounded transition-colors cursor-pointer"
-            >
-              Cancelar
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleCreateOrder}
-              className="text-2xl bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-8 rounded transition-colors cursor-pointer"
-            >
-              Pagar
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      )}
+            {/* RESUMEN DE COMPRA (PANEL DERECHO) */}
+            <div className="w-full lg:w-80 bg-stone-900/50 p-6 rounded-2xl border border-stone-800 h-fit">
+              <h3 className="text-xl text-white font-bold mb-6">Resumen</h3>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-stone-400">
+                  <span>Subtotal</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-stone-400">
+                  <span>Envío estimado</span>
+                  <span className="text-green-500">Gratis</span>
+                </div>
+              </div>
+
+              <div className="border-t border-stone-700 pt-4 mb-8">
+                <div className="flex justify-between items-end">
+                  <span className="text-stone-300">Total</span>
+                  <span className="text-3xl text-primary font-bold font-rancho">
+                    ${total.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleCreateOrder}
+                className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all mb-3"
+              >
+                Proceder al Pago
+              </motion.button>
+
+              <button
+                onClick={onClose}
+                className="w-full text-stone-500 hover:text-white transition-colors text-sm"
+              >
+                Continuar comprando
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </Modal>
   );
 }

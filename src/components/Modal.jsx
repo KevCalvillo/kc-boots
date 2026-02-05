@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import XmarkCircle from "@/ui/icons/ExitCircle";
+import { X } from "lucide-react";
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children, className }) {
   const [show, setShow] = useState(isOpen);
   const onCloseRef = useRef(onClose);
 
@@ -31,29 +31,27 @@ export default function Modal({ isOpen, onClose, children }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={handleClose}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
         >
           <motion.div
-            initial={{ scale: 0.7, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.7, opacity: 0, y: 20 }}
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 300,
-            }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#101010cf] w-fit rounded-3xl shadow-4xl relative overflow-hidden"
+            // CAMBIO CLAVE: Quitamos 'w-fit' por defecto si existe className
+            // Agregamos 'max-w-full' para evitar desbordes en móviles
+            className={`bg-[#121212] relative rounded-3xl shadow-2xl border border-stone-800 overflow-hidden flex flex-col ${className ? className : "w-fit"} max-h-[90vh] max-w-full`}
           >
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
+            {/* BOTÓN DE CERRAR AJUSTADO */}
+            <button
               onClick={handleClose}
-              className="absolute top-6 right-6 text-stone-400 hover:text-white cursor-pointer z-10"
+              className="absolute top-4 right-4 z-[60] p-2 bg-black/40 hover:bg-red-500/20 rounded-full text-stone-400 hover:text-white backdrop-blur-md transition-all duration-300"
             >
-              <XmarkCircle className="w-8 h-8 fill-white hover:fill-red-500 transition-colors duration-300" />
-            </motion.button>
-            <div className="flex p-6 gap-10">{children}</div>
+              <X className="w-5 h-5" />
+            </button>
+
+            {children}
           </motion.div>
         </motion.div>
       )}

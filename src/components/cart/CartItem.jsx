@@ -1,68 +1,69 @@
 "use client";
 import { motion } from "framer-motion";
-import MinusCircle from "@/ui/icons/Minus";
-import CirclePlus from "@/ui/icons/CirclePlus";
-import Delete from "@/ui/icons/Delete";
+import { Minus, Plus, Trash2 } from "lucide-react";
 
 export default function CartItem({ item, onDecrease, onIncrease, onRemove }) {
   return (
-    <motion.tr
+    <motion.div
+      layout
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 20 }}
-      transition={{ duration: 0.3 }}
-      className="bg-[#141414f2] border-b border-gray-600"
+      exit={{ opacity: 0, x: -50 }}
+      className="flex gap-4 p-4 mb-4 bg-[#1a1a1a] rounded-2xl border border-stone-800 hover:border-stone-700 transition-colors group"
     >
-      <td className="px-10 py-5 flex items-center gap-10">
-        <motion.div
-          whileHover={{ scale: 1.05, rotate: 2 }}
-          className="relative bg-linear-to-br from-stone-400 to-stone-200 flex items-center justify-center p-4 rounded-2xl"
-        >
-          <img
-            src={item.imageUrl}
-            className="w-full h-20 object-contain transform"
-            alt={item.title}
-          />
-        </motion.div>
-        {item.title}
-      </td>
-      <td className="text-center">$ {item.price} USD</td>
-      <td className="text-center">
-        <motion.span
-          key={item.quantity}
-          initial={{ scale: 1.5 }}
-          animate={{ scale: 1 }}
-          className="font-bold text-green-500"
-        >
-          {item.quantity}
-        </motion.span>
-      </td>
-      <td className="text-center space-x-3">
-        <motion.button
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => onDecrease(item.id)}
-          aria-label="Disminuir cantidad"
-        >
-          <MinusCircle className="w-6 h-6 hover:fill-green-600 transition-colors duration-300 cursor-pointer" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => onIncrease(item)}
-          aria-label="Aumentar cantidad"
-        >
-          <CirclePlus className="w-6 h-6 hover:fill-green-600 transition-colors duration-300 cursor-pointer" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.2, rotate: 10 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => onRemove(item.id)}
-          aria-label="Eliminar"
-        >
-          <Delete className="w-6 h-6 hover:fill-red-600 transition-colors duration-300 cursor-pointer" />
-        </motion.button>
-      </td>
-    </motion.tr>
+      {/* IMAGEN DEL PRODUCTO */}
+      <div className="w-24 h-24 bg-gradient-to-br from-stone-800 to-stone-900 rounded-xl p-2 flex items-center justify-center flex-shrink-0">
+        <img
+          src={item.imageUrl}
+          alt={item.title}
+          className="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
+        />
+      </div>
+
+      {/* INFO DEL PRODUCTO */}
+      <div className="flex-1 flex flex-col justify-between py-1">
+        <div>
+          <div className="flex justify-between items-start">
+            <h4 className="text-white font-bold text-lg leading-tight pr-4">
+              {item.title}
+            </h4>
+            <button
+              onClick={() => onRemove(item.id)}
+              className="text-stone-600 hover:text-red-500 transition-colors p-1"
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
+          </div>
+          <p className="text-sm text-stone-500 mt-1">Talla: 27 MX</p>{" "}
+          {/* Ejemplo estático */}
+        </div>
+
+        <div className="flex justify-between items-end mt-2">
+          {/* CONTROL DE CANTIDAD */}
+          <div className="flex items-center gap-3 bg-stone-900 rounded-lg p-1 border border-stone-800">
+            <button
+              onClick={() => onDecrease(item.id)}
+              className="w-7 h-7 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 rounded-md transition-all"
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-white font-mono font-bold w-4 text-center">
+              {item.quantity}
+            </span>
+            <button
+              onClick={() => onIncrease(item)}
+              className="w-7 h-7 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 rounded-md transition-all"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* PRECIO */}
+          <span className="text-primary font-bold text-xl">
+            ${(item.price * item.quantity).toFixed(2)}
+          </span>
+        </div>
+      </div>
+    </motion.div>
   );
 }

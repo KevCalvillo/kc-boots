@@ -58,81 +58,90 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
         });
       });
   }
+  // Estilo común para inputs (Igual que en Checkout)
+  const inputStyle =
+    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
 
   return (
-    <>
-      <h1 className="text-white text-center text-5xl font-rancho">
-        Iniciar Sesion
-      </h1>
-      <p className="text-lg text-stone-500 mb-4 mt-2 text-center">
-        Ingresa tus credenciales.
-      </p>
-      <button className="w-full bg-primary hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-2 px-4 rounded-full mb-4 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300">
-        <Google className='w-7 h-7'/>
+    <div className="font-roboto">
+      <div className="text-center mb-8">
+        <h1 className="text-white text-5xl font-rancho mb-2">Bienvenido</h1>
+        <p className="text-stone-400">
+          Ingresa tus credenciales para continuar.
+        </p>
+      </div>
+
+      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl mb-6 transition-all duration-300 shadow-lg">
+        <Google className="w-6 h-6" />
         Continuar con Google
       </button>
-      <div className="flex items-center my-6">
-        <hr className="grow border-t border-gray-600" />
-        <span className="mx-2 text-gray-400">O</span>
-        <hr className="grow border-t border-gray-600" />
-      </div>
-      <form
-        action=""
-        onSubmit={handleOnSubmit}
-        className="text-md flex flex-col gap-4"
-      >
-        <label htmlFor="" className="text-white">
-          Email:
-        </label>
-        <input
-          required
-          name="email"
-          type="email"
-          placeholder="Ingresa tu email"
-          className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
-        />
 
-        <label htmlFor="" className="text-white">
-          Contraseña:
-        </label>
-        <div className="relative w-full">
+      <div className="flex items-center mb-6">
+        <hr className="grow border-t border-stone-800" />
+        <span className="mx-4 text-stone-600 text-sm">O</span>
+        <hr className="grow border-t border-stone-800" />
+      </div>
+
+      <form onSubmit={handleOnSubmit} className="flex flex-col gap-5">
+        <div>
+          <label className="text-sm text-stone-500 mb-1 block ml-1 tracking-wider">
+            Email
+          </label>
           <input
             required
-            name="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Ingresa tu contraseña"
-            className="w-full bg-[#3a3a3a] text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 "
+            name="email"
+            type="email"
+            placeholder="ejemplo@correo.com"
+            className={inputStyle}
           />
+        </div>
 
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-400 hover:text-white"
-          >
-            {showPassword ? (
-              <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
-            ) : (
-              <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
-            )}
-          </button>
+        <div>
+          <label className="text-sm text-stone-500 mb-1 block ml-1 tracking-wider">
+            Contraseña
+          </label>
+          <div className="relative w-full">
+            <input
+              required
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              className={inputStyle}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
+            >
+              {showPassword ? (
+                  <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+              ) : (
+                <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+              )}
+            </button>
+          </div>
         </div>
 
         <button
           type="submit"
-          className="text-xl bg-primary hover:bg-primary-hover hover:scale-102 duration-300 font-bold py-2 rounded-full transition-all cursor-pointer mt-4 "
+          className="mt-2 text-xl bg-primary hover:bg-primary-hover font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-1"
         >
-          Iniciar Sesion
+          Iniciar Sesión
         </button>
-        <label htmlFor="" className="text-white text-center block mt-3">
-          Si aun no tienes una cuenta <br />{" "}
-          <button
-            onClick={() => setShowRegisterForm(true)}
-            className="text-primary hover:text-primary-hover cursor-pointer transition-colors"
-          >
-            Registrate aquí
-          </button>
-        </label>
+
+        <div className="text-center mt-4">
+          <p className="text-stone-500 text-sm">
+            ¿Aún no tienes cuenta?{" "}
+            <button
+              type="button"
+              onClick={() => setShowRegisterForm(true)}
+              className="text-primary hover:text-white font-bold transition-colors underline decoration-primary/50"
+            >
+              Regístrate aquí
+            </button>
+          </p>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
