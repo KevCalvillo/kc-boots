@@ -79,7 +79,7 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
       {error && <p className="text-red-500 mt-4">{error}</p>}
       <button
         disabled={!stripe || isLoading}
-        className="mt-6 w-full bg-primary text-bgprimary hover:scale-102 font-bold py-4 rounded-full text-xl disabled:opacity-50 transition-all duration-300 transform hover:bg-primary-hover"
+        className="mt-6 w-full bg-primary text-bgprimary hover:scale-102 font-bold py-2 cursor-pointer rounded-full text-lg disabled:opacity-50 transition-all duration-300 transform hover:bg-primary-hover"
       >
         {isLoading ? "Procesando..." : `Pagar $${total.toLocaleString()}`}
       </button>

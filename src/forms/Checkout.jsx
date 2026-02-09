@@ -27,7 +27,7 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
     if (shippingDisplay && totalDisplay) {
       shippingDisplay.textContent =
         shippingCost === 0 ? "GRATIS" : `$${shippingCost.toLocaleString()}`;
-      shippingDisplay.className = shippingCost === 0 ? "text-green-500" : "";
+      shippingDisplay.className = shippingCost === 0 ? "text-primary" : "";
       totalDisplay.textContent = `$${finalTotal.toLocaleString()}`;
     }
   }, [shippingCost, finalTotal]);
@@ -58,8 +58,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
     return null;
   }
   const inputStyle =
-    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
-  const labelStyle = "text-sm text-stone-400 ml-1 mb-2 block";
+    "w-full bg-stone-900 text-sm border border-stone-800 text-white py-2 px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
+  const labelStyle = "text-xs text-stone-400 ml-1 mb-2 block";
 
   function handleButtonClick() {
     const orderData = {
@@ -83,6 +83,7 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
       .then((data) => {
         setStep(2);
         setClientSecret(data.clientSecret);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
         console.log(error);
@@ -127,8 +128,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
 
   return (
     <div className="bg-[#121212] p-8 md:p-10 rounded-3xl border border-stone-800 shadow-lg font-roboto">
-      <div className="flex flex-col gap-8">
-        <div className="flex items-center justify-center gap-4 text-sm md:text-base">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-center gap-5 text-xs md:text-sm">
           <div className={`flex items-center gap-2 ${getStepStyle(1).text}`}>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${getStepStyle(1).circle}`}
@@ -172,8 +173,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
             }}
           >
             <div>
-              <div className="flex justify-between items-end mb-6">
-                <h3 className="text-3xl font-rancho text-white">Contacto</h3>
+              <div className="flex justify-between items-end mb-2">
+                <h3 className="text-4xl font-rancho text-white">Contacto</h3>
               </div>
 
               <div className="flex flex-col gap-4">
@@ -191,7 +192,7 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                   <input
                     type="checkbox"
                     name="newsletter"
-                    className="mr-3 accent-primary w-5 h-5 cursor-pointer"
+                    className="mr-5 accent-primary size-4 cursor-pointer"
                   />
                   <span className="text-stone-400 group-hover:text-white transition-colors">
                     Enviarme novedades y ofertas
@@ -200,14 +201,14 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
               </div>
             </div>
 
-            <hr className="border-stone-800 my-6" />
+            <hr className="border-stone-800 my-4" />
 
             <div className="mt-4">
-              <h3 className="text-3xl font-rancho text-white mb-6">
+              <h3 className="text-3xl font-rancho text-white mb-4">
                 Dirección de Envío
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col">
                   <label className={labelStyle}>Nombre</label>
                   <input
@@ -320,8 +321,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
 
             <hr className="border-stone-800 my-6" />
 
-            <div className="mt-4">
-              <h3 className="text-3xl font-rancho text-white mb-6">
+            <div className="mt-2">
+              <h3 className="text-2xl font-rancho text-white mb-4">
                 Método de Envío
               </h3>
               <input
@@ -330,37 +331,37 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                 value={shippingMethod}
               />
 
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div
                   onClick={() => setShippingMethod("standard")}
-                  className={`cursor-pointer p-5 rounded-xl border flex items-center justify-between transition-all duration-300 group
+                  className={`cursor-pointer px-8 rounded-full border flex items-center justify-between transition-all duration-300 group
                 ${
                   shippingMethod === "standard"
                     ? "border-primary bg-primary/10"
                     : "border-stone-700 bg-stone-900 hover:border-stone-500 hover:bg-stone-800"
                 }`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 ">
                     <Truck
                       className={
                         shippingMethod === "standard"
                           ? "text-primary"
-                          : "text-stone-500 group-hover:text-stone-300"
+                          : "text-stone-500 group-hover:text-stone-300 "
                       }
                     />
                     <div>
-                      <p className="font-bold text-white">
+                      <p className="font-bold text-white text-sm">
                         Envío Estándar (FedEx)
                       </p>
-                      <p className="text-sm text-stone-400">3-5 días hábiles</p>
+                      <p className="text-xs text-stone-400">3-5 días hábiles</p>
                     </div>
                   </div>
-                  <span className="font-bold text-white">GRATIS</span>
+                  <span className="font-bold text-white text-sm">GRATIS</span>
                 </div>
 
                 <div
                   onClick={() => setShippingMethod("express")}
-                  className={`cursor-pointer p-5 rounded-xl border flex items-center justify-between transition-all duration-300 group
+                  className={`cursor-pointer px-8 py-4 rounded-full border flex items-center justify-between transition-all duration-300 group
                 ${
                   shippingMethod === "express"
                     ? "border-primary bg-primary/10"
@@ -376,19 +377,19 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                       }
                     />
                     <div>
-                      <p className="font-bold text-white">
+                      <p className="font-bold text-white text-sm">
                         Envío Express (DHL)
                       </p>
-                      <p className="text-sm text-stone-400">1-2 días hábiles</p>
+                      <p className="text-xs text-stone-400">1-2 días hábiles</p>
                     </div>
                   </div>
-                  <span className="font-bold text-white">$250.00</span>
+                  <span className="font-bold text-white text-sm">$250.00</span>
                 </div>
               </div>
             </div>
             <button
               type="submit"
-              className="mt-6 w-full bg-primary hover:bg-primary-hover text-bgprimary hover:scale-102 font-bold py-4 rounded-full text-xl shadow-lg transition-all duration-300 transform"
+              className="mt-6 w-full bg-primary hover:bg-primary-hover text-bgprimary hover:scale-102 font-bold py-2 cursor-pointer rounded-full text-lg transition-all duration-300 transform"
             >
               Continuar al Pago
             </button>

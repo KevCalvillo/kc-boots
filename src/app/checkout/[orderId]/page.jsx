@@ -21,10 +21,10 @@ export default async function CheckoutPage({ params }) {
   return (
     <section className="w-full min-h-screen bg-[#050505] text-white pt-32 pb-20 font-roboto">
       <div className="container mx-auto px-4 lg:px-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-10">
-          <h1 className="text-9xl md:text-9xl font-rancho">
+        <div className="flex flex-col lg:flex-row items-center justify-between mb-10 gap-10">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-rancho">
             Checkout
-            <p className="text-2xl text-primary tracking-widest">
+            <p className="text-2xl text-primary tracking-widest ">
               Ya casi son tuyas, un ultimo paso.
             </p>
           </h1>
@@ -41,32 +41,32 @@ export default async function CheckoutPage({ params }) {
 
           <div className="lg:col-span-5 h-fit lg:sticky lg:top-32">
             <div className="bg-[#121212] p-8 rounded-3xl border border-stone-800 shadow-2xl">
-              <h2 className="font-rancho text-4xl mb-8 border-b border-stone-800 pb-4">
+              <h2 className="font-rancho text-3xl mb-4 border-b border-stone-800 pb-4">
                 Tu Pedido
               </h2>
 
-              <div className="max-h-[400px] overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-6">
+              <div className="max-h-[300px] overflow-y-auto scrollbar-negro flex flex-col gap-6">
                 {order.orderItems.map((item) => (
                   <div key={item.id} className="flex gap-4 items-start">
-                    <div className="w-20 h-20 bg-gradient-to-br from-stone-200 to-stone-500 rounded-xl p-2 flex items-center justify-center shrink-0">
+                    <div className="size-18 bg-gradient-to-br from-stone-200 to-stone-500 rounded-xl flex items-center justify-center shrink-0">
                       <img
                         src={item.product.imageUrl}
-                        className="w-16 h-16 object-contain"
+                        className="size-12 object-contain"
                         alt={item.product.title}
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-lg leading-tight">
+                      <h3 className="font-bold text-sm leading-tight">
                         {item.product.title}
                       </h3>
-                      <p className="text-stone-400 text-sm mt-1">
+                      <p className="text-stone-400 text-xs mt-1">
                         Cant: {item.quantity}
                       </p>
-                      <p className="text-stone-400 text-sm mt-1">
+                      <p className="text-stone-400 text-xs mt-1">
                         Talla: 27 MX
                       </p>
                     </div>
-                    <div className="text-right font-mono font-bold text-lg text-stone-400">
+                    <div className="text-right font-mono font-bold text-lg text-stone-400 mr-2">
                       ${Number(item.price).toLocaleString()}
                     </div>
                   </div>
@@ -75,7 +75,7 @@ export default async function CheckoutPage({ params }) {
 
               <div
                 id="order-summary-container"
-                className="mt-8 border-t border-stone-800 pt-6 space-y-3 text-lg"
+                className="mt-4 border-t border-stone-800 pt-4 space-y-1 text-md"
               >
                 <div className="flex justify-between text-stone-400">
                   <span>Subtotal</span>
@@ -83,18 +83,18 @@ export default async function CheckoutPage({ params }) {
                 </div>
                 <div className="flex justify-between text-stone-400">
                   <span>Envío</span>
-                  <span id="shipping-cost-display" className="text-green-500">
+                  <span id="shipping-cost-display" className="text-primary">
                     GRATIS
                   </span>
                 </div>
-                <div className="flex justify-between text-2xl font-bold mt-6 pt-6 border-t border-stone-800 text-primary">
+                <div className="flex justify-between text-xl font-bold mt-4 pt-4 border-t border-stone-800 text-primary">
                   <span>Total</span>
                   <span id="total-display">${subtotal.toLocaleString()}</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 flex justify-between text-stone-500 text-sm px-4">
+            <div className="mt-4 flex justify-between text-stone-500 text-sm px-4">
               <span className="flex items-center gap-1">
                 <CheckCircle size={16} /> Compra Segura
               </span>

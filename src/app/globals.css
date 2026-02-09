@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@tailwind utilities;
 
 @theme {
   --color-primary: #a18046;
@@ -7,10 +8,10 @@
   --color-secondary: #7272728c;
   --color-secondary-hover: #1f1f1f;
   --color-bgprimary: #010101;
-  --color-text:#E0E0E0;
+  --color-text: #e0e0e0;
 
   --font-roboto: var(--font-roboto-slab);
-  
+
   --font-rancho: var(--font-rancho);
 }
 
@@ -19,4 +20,41 @@ body {
   padding: 0;
   background: var(--color-bgprimary);
   font-family: var(--font-roboto);
+}
+
+/* Ocultar scrollbar pero mantener funcionalidad de scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+
+@layer components {
+  /* Scrollbar completo */
+  .scrollbar-negro::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra vertical */
+    height: 8px; /* Altura de la barra horizontal */
+  }
+
+  /* Track (fondo de la barra) */
+  .scrollbar-negro::-webkit-scrollbar-track {
+    @apply bg-bgprimary;
+    border-radius: 100vh;
+  }
+
+  /* Thumb (la parte que se mueve) */
+  .scrollbar-negro::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+    border-radius: 100vh;
+    border: 1px solid #030712; /* Borde para suavizar */
+  }
+
+  /* Hover del Thumb */
+  .scrollbar-negro::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-hover;
+  }
 }

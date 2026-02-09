@@ -12,11 +12,10 @@ export default function BootCard({ bota }) {
     isFavorite,
   } = useAuth();
 
-  
-  function verificaFavoritos(bota){
-    if(user){
+  function verificaFavoritos(bota) {
+    if (user) {
       toggleFavorite(bota);
-    }else{
+    } else {
       setModalOpen(true);
       setShowRegisterForm(false);
     }
@@ -34,40 +33,40 @@ export default function BootCard({ bota }) {
   }
 
   return (
-    <div className="h-full flex flex-col max-w-xs rounded-3xl overflow-hidden shadow-2xl transition-all hover:scale-[1.02] duration-300">
-      <div className="relative bg-linear-to-br from-stone-400 to-stone-200 flex items-center justify-center p-10">
+    <div className="h-full flex flex-col w-42 md:w-70 lg:w-80 mx-auto rounded-3xl overflow-hidden shadow-2xl transition-all hover:scale-[1.02] duration-300">
+      <div className="relative bg-linear-to-br from-stone-400 to-stone-200 flex items-center justify-center md:p-12 py-8">
         <img
           src={bota.imageUrl}
-          className="w-full h-60 object-contain transform"
+          className="w-full md:h-50 h-30 object-contain transform"
           alt={bota.title}
         />
         <button onClick={() => verificaFavoritos(bota)}>
           <Heart
-            className={`absolute top-8 right-8 w-10 h-10 cursor-pointer hover:scale-110 transition-transform z-20 stroke-2 stroke-[#95812f] ${isInFavorites ? "fill-primary" : "fill-transparent"}`}
+            className={`absolute md:top-8 md:right-8 top-46 right-6 md:size-8 size-6 cursor-pointer hover:scale-110 transition-transform z-20 stroke-2 stroke-[#95812f] ${isInFavorites ? "fill-primary" : "fill-transparent"}`}
           />
         </button>
       </div>
 
       <div className="relative z-10 -mt-6 p-6 flex flex-col flex-1 gap-2 text-stone-100 bg-[#1d1d1d] rounded-t-3xl">
-        <h1 className="text-3xl font-bold font-rancho">{bota.title}</h1>
+        <h1 className="md:text-2xl text-xl font-bold font-rancho">{bota.title}</h1>
 
-        <p className="text-sm line-clamp-2 flex-1 text-stone-400">
+        <p className="md:text-sm text-[10px] line-clamp-2 flex-1 text-stone-400">
           {bota.description}
         </p>
 
         <div className="flex justify-between items-center mt-auto pt-2">
           <div className="flex flex-col">
-            <span className="text-sm uppercase font-bold text-primary">
+            <span className="lg:text-sm md:text-xs text-[10px] uppercase font-bold text-primary">
               Precio
             </span>
-            <span className="text-2xl">${bota.price}</span>
+            <span className="lg:text-2xl md:text-xl text-[16px]">${bota.price}</span>
           </div>
 
           <button
             onClick={() => verificaUser(bota)}
-            className="bg-primary p-3 rounded-xl hover:bg-primary-hover transition-colors cursor-pointer shadow-lg shadow-green-900/20 group"
+            className="bg-primary lg:p-4 md:p-2 p-2 rounded-xl hover:bg-primary-hover transition-colors cursor-pointer shadow-lg shadow-green-900/20 group"
           >
-            <Plus className="w-8 h-8 group-hover:scale-110 transition-transform fill-bgprimary" />
+            <Plus className="lg:size-6 md:size-5 size-4 group-hover:scale-110 transition-transform fill-bgprimary" />
           </button>
         </div>
       </div>

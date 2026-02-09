@@ -59,10 +59,10 @@ export default function CartModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="w-full font-roboto p-10">
+      <div className="w-full font-roboto p-4 md:p-10">
         {/* HEADER DEL MODAL */}
         <div className="flex items-center justify-between mb-8 border-b border-stone-800 pb-4">
-          <h2 className="text-4xl text-white font-rancho flex items-center gap-3">
+          <h2 className="text-2xl md:text-4xl text-white font-rancho flex items-center gap-2 md:gap-3">
             <ShoppingBag className="w-8 h-8 text-primary" />
             Tu Carrito{" "}
             <span className="text-stone-500 text-lg font-roboto font-normal">

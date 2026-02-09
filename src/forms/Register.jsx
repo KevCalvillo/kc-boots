@@ -80,32 +80,32 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
   }
 
   const inputStyle =
-    "w-full bg-stone-900 border border-stone-800 text-white py-3 px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
-  const labelStyle = "text-sm text-stone-500 ml-1 block mb-1";
+    "text-xs md:text-base w-full bg-stone-900 border border-stone-800 text-white py-2 md:py-2 px-3 md:px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";
+  const labelStyle = "text-[10px] md:text-xs text-stone-500 ml-1 block mb-1";
 
   return (
-    <div className="font-roboto mt-4">
-      <div className="text-center mb-6">
-        <h1 className="text-white text-5xl font-rancho mb-2">
+    <div className="font-roboto md:mt-4">
+      <div className="text-center mb-4 md:mb-6">
+        <h1 className="text-white text-3xl md:text-5xl font-rancho mb-2">
           Crea una cuenta
         </h1>
-        <p className="text-stone-400 text-sm">
+        <p className="text-stone-400 text-xs md:text-sm">
           Ingresa tus datos para unirte al gremio.
         </p>
       </div>
 
-      <button className="w-full bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-full mb-6 transition-all duration-300 shadow-lg">
-        <Google className="w-6 h-6" />
+      <button className="w-full text-sm md:text-base cursor-pointer bg-primary text-black hover:bg-primary-hover flex items-center justify-center gap-3 font-bold py-2 md:py-3 rounded-full transition-all duration-300 shadow-lg">
+        <Google className="md:size-6 size-4" />
         Continuar con Google
       </button>
 
-      <div className="flex items-center mb-6">
+      <div className="flex items-center my-4">
         <hr className="grow border-t border-stone-800" />
         <span className="mx-4 text-stone-600 text-sm">O</span>
         <hr className="grow border-t border-stone-800" />
       </div>
 
-      <form onSubmit={handleOnSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleOnSubmit} className="flex flex-col gap-2 md:gap-4">
         <div>
           <label className={labelStyle}>Nombre</label>
           <input
@@ -145,9 +145,9 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
               className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
             >
               {showPassword ? (
-                <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+                <EyeOpen className="size-4 md:size-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               ) : (
-                <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+                <EyeClosed className="size-4 md:size-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               )}
             </button>
           </div>
@@ -169,9 +169,9 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
               className="absolute top-1/2 right-4 transform -translate-y-1/2 text-stone-500 hover:text-white transition-colors"
             >
               {showConfirmPassword ? (
-                <EyeOpen className="w-6 h-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+                <EyeOpen className="size-4 md:size-6 fill-white hover:fill-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               ) : (
-                <EyeClosed className="w-6 h-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
+                <EyeClosed className="size-4 md:size-6 fill-white hover:stroke-primary hover:scale-110 transition-all duration-300 cursor-pointer" />
               )}
             </button>
           </div>
@@ -211,7 +211,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
         <button
           type="submit"
           disabled={nivel < 3}
-          className="mt-2 text-lg bg-primary hover:bg-primary-hover hover:scale-102 disabled:opacity-50 disabled:scale-100 disabled:hover:bg-primary font-bold py-3 rounded-full transition-all shadow-lg duration-300"
+          className="mt-2 text-sm md:text-base bg-primary hover:bg-primary-hover hover:scale-102 disabled:opacity-50 disabled:scale-100 disabled:hover:bg-primary font-bold py-2 md:py-3 rounded-full transition-all shadow-lg duration-300"
         >
           Crear Cuenta
         </button>
@@ -222,7 +222,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             <button
               type="button"
               onClick={() => setShowRegisterForm(false)}
-              className="text-primary hover:text-white font-bold transition-colors"
+              className="text-primary hover:text-white transition-colors cursor-pointer"
             >
               Inicia sesión aquí
             </button>

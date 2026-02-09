@@ -107,14 +107,14 @@ export default function OrderConfirmation({ orderId, total }) {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link href="/boots" className="w-full sm:w-auto">
-            <button className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover hover:scale-102 font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform">
+            <button className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover hover:scale-102 cursor-pointer font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform">
               <ShoppingBag className="w-5 h-5" />
               Seguir Comprando
             </button>
           </Link>
 
           <Link href="/" className="w-full sm:w-auto">
-            <button className="w-full flex items-center justify-center gap-2 bg-transparent border-2 hover:scale-102 border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300">
+            <button className="w-full flex items-center justify-center gap-2 bg-transparent border-2 hover:scale-102 cursor-pointer border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-300">
               Volver al Inicio
               <ArrowRight className="w-5 h-5" />
             </button>

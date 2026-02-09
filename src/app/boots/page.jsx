@@ -59,11 +59,11 @@ function AllBoots() {
         <div className="absolute inset-0 bg-[url('/bgBotas5.webp')] bg-cover bg-center "></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-[#050505]"></div>
 
-        <div className="relative z-10 mr-auto ml-30 text-left mt-10">
+        <div className="relative z-10 mr-auto ml-4 md:ml-10 lg:ml-30 text-left mt-10">
           <h1 className="text-7xl md:text-9xl text-white font-rancho drop-shadow-2xl">
             Catálogo
           </h1>
-          <p className="text-primary tracking-widest text-xl mt-4 max-w-lg mx-auto font-light">
+          <p className="text-primary tracking-widest text-sm md:text-xl mt-4 max-w-lg font-light">
             Explora nuestra colección exclusiva de pieles exóticas y diseños
             artesanales
           </p>
@@ -73,7 +73,6 @@ function AllBoots() {
       {/* 2. BARRA DE HERRAMIENTAS - Búsqueda y Filtros */}
       <div className="sticky top-0 z-30 bg-[#050505]/80 backdrop-blur-md border-y border-stone-800 py-6 px-4 md:px-10">
         <div className="container mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
-          {/* Tabs de Categorías (Visual) */}
           <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
             {["all", "exotic", "work", "western"].map((cat) => (
               <button
@@ -117,7 +116,7 @@ function AllBoots() {
       {/* 3. GRID DE PRODUCTOS */}
       <div className="container mx-auto px-4 md:px-10 py-16 min-h-[50vh]">
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <div
                 key={n}
@@ -128,7 +127,7 @@ function AllBoots() {
         ) : filteredProducts.length > 0 ? (
           <motion.div
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12"
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-8 gap-x-2 md:gap-y-12 gap-y-4"
           >
             <AnimatePresence>
               {filteredProducts.map((bota) => (

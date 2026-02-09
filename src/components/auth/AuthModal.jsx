@@ -16,9 +16,22 @@ export default function AuthModal({
       onClose={onClose}
       className="w-[95%] md:w-full md:max-w-5xl"
     >
-      <div className="flex flex-col md:flex-row h-[85vh] md:h-[650px]">
+      <motion.div
+        className="flex flex-col md:flex-row overflow-hidden"
+        initial={false}
+        animate={{
+          height: showRegisterForm ? "85vh" : "65vh",
+        }}
+        transition={{
+          duration: 0.4,
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        style={{
+          maxHeight: "85vh",
+        }}
+      >
         {/* LADO IZQUIERDO: IMAGEN (45% del ancho) */}
-        <div className="relative hidden md:block md:w-[45%] h-full overflow-hidden">
+        <div className="relative hidden md:block md:w-[45%] overflow-hidden">
           <motion.img
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
@@ -45,7 +58,7 @@ export default function AuthModal({
         {/* LADO DERECHO: FORMULARIO (55% del ancho) */}
         <div className="w-full md:w-[55%] bg-[#121212] flex flex-col relative">
           {/* Scroll container para el formulario */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-8 md:p-12 pt-16">
+          <div className="flex-1 overflow-y-scroll scrollbar-hide p-4 md:p-16 pt-8 md:pt-16">
             <motion.div
               key={showRegisterForm ? "register" : "login"}
               initial={{ opacity: 0, x: 20 }}
@@ -66,7 +79,7 @@ export default function AuthModal({
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Modal>
   );
 }
