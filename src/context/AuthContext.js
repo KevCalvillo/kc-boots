@@ -1,12 +1,15 @@
 "use client";
 import { createContext, useState, useContext, useEffect } from "react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { useCart } from "@/hooks/useCart";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+function AuthContextInner({ children }) {
+  const { data: session, status } = useSession();
+  const user = session?.user || null;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [cartModalOpen, setCartModalOpen] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -30,7 +33,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        setUser,
+        status,
         modalOpen,
         setModalOpen,
         showRegisterForm,
@@ -44,6 +47,14 @@ export function AuthProvider({ children }) {
     >
       {children}
     </AuthContext.Provider>
+  );
+}
+
+export function AuthProvider({ children }) {
+  return (
+    <SessionProvider>
+      <AuthContextInner>{children}</AuthContextInner>
+    </SessionProvider>
   );
 }
 

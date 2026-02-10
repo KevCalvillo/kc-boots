@@ -21,7 +21,6 @@ export default function CartModal({
 
   const handleCreateOrder = () => {
     const orderData = {
-      userId: user.id,
       total: total,
       orderItems: cart.map((item) => ({
         productId: item.id,

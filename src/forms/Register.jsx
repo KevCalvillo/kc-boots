@@ -4,6 +4,7 @@ import EyeOpen from "../ui/icons/EyeOpen";
 import EyeClosed from "../ui/icons/EyeClosed";
 import Google from "../ui/icons/Google";
 import Swal from "sweetalert2";
+import { signIn } from "next-auth/react";
 import { calcularNivelPassword } from "@/libs/utils";
 
 export default function RegisterForm({ onClose, setShowRegisterForm }) {
@@ -19,7 +20,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
     setPasswordMatch(true);
   }
 
-  function handleOnSubmit(e) {
+  async function handleOnSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
@@ -43,7 +44,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
           }
           return res.json();
         })
-        .then(() => {
+        .then(async () => {
           Swal.fire({
             title: "¡Bienvenido a la Familia!",
             text: "Tu cuenta ha sido creada exitosamente.",
@@ -52,6 +53,12 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
             timer: 2000,
             background: "#1d1d1de8",
             color: "#ffffff",
+          });
+          // Auto-login después del registro
+          await signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: false,
           });
           onClose();
           cleanState();

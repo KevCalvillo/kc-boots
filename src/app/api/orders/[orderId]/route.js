@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/libs/prisma";
+import { auth } from "@/auth";
 
 export async function PATCH(req, { params }) {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ message: "No autorizado" }, { status: 401 });
+  }
+
   const { orderId } = await params;
   const body = await req.json();
   const { status } = body;

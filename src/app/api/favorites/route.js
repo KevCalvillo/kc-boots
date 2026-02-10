@@ -1,21 +1,16 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../libs/prisma";
-
+import { auth } from "@/auth";
 
 export async function GET(req) {
   try {
-    const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
-
-    if (!userId) {
-      return NextResponse.json(
-        { message: "userId es requerido" },
-        { status: 400 },
-      );
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
     }
 
     const favorites = await prisma.favorite.findMany({
-      where: { userId },
+      where: { userId: session.user.id },
       include: {
         product: true,
       },
@@ -32,15 +27,22 @@ export async function GET(req) {
 // POST: Agregar un producto a favoritos
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { userId, productId } = body;
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
+    }
 
-    if (!userId || !productId) {
+    const body = await req.json();
+    const { productId } = body;
+
+    if (!productId) {
       return NextResponse.json(
-        { message: "userId y productId son requeridos" },
+        { message: "productId es requerido" },
         { status: 400 },
       );
     }
+
+    const userId = session.user.id;
 
     // Verificar si ya existe
     const existing = await prisma.favorite.findUnique({
@@ -70,20 +72,24 @@ export async function POST(req) {
 // DELETE: Quitar un producto de favoritos
 export async function DELETE(req) {
   try {
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
     const productId = searchParams.get("productId");
 
-    if (!userId || !productId) {
+    if (!productId) {
       return NextResponse.json(
-        { message: "userId y productId son requeridos" },
+        { message: "productId es requerido" },
         { status: 400 },
       );
     }
 
     await prisma.favorite.delete({
       where: {
-        userId_productId: { userId, productId },
+        userId_productId: { userId: session.user.id, productId },
       },
     });
 

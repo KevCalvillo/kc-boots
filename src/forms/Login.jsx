@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
 import EyeOpen from "../ui/icons/EyeOpen";
 import EyeClosed from "../ui/icons/EyeClosed";
@@ -8,55 +8,40 @@ import Google from "../ui/icons/Google";
 
 export default function LoginForm({ onClose, setShowRegisterForm }) {
   const [showPassword, setShowPassword] = useState(false);
-  const { setUser } = useAuth();
 
-  function handleOnSubmit(e) {
+  async function handleOnSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-      }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.message);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setUser(data);
-        Swal.fire({
-          title: "¡Bienvenido!",
-          text: "Nos alegra verte de nuevo",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 2000,
-          background: "#1d1d1de8",
-          color: "#ffffff",
-        });
 
-        onClose();
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Error",
-          text: error.message,
-          icon: "error",
-          showConfirmButton: false,
-          timer: 2000,
-          background: "#1d1d1de8",
-          color: "#ffffff",
-        });
+    const result = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      Swal.fire({
+        title: "Error",
+        text: result.error,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#1d1d1de8",
+        color: "#ffffff",
       });
+    } else {
+      Swal.fire({
+        title: "¡Bienvenido!",
+        text: "Nos alegra verte de nuevo",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#1d1d1de8",
+        color: "#ffffff",
+      });
+      onClose();
+    }
   }
   const inputStyle =
     "text-xs md:text-base w-full bg-stone-900 border border-stone-800 text-white py-2 md:py-3 px-3 md:px-5 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-stone-600";

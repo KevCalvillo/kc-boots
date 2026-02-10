@@ -1,14 +1,20 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/libs/prisma";
+import { auth } from "@/auth";
 
 export async function POST(req) {
   try {
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
+    }
+
     const body = await req.json();
-    const { userId, total, orderItems } = body;
+    const { total, orderItems } = body;
 
     const order = await prisma.order.create({
       data: {
-        userId: userId,
+        userId: session.user.id,
         total: total,
 
         orderItems: {
@@ -29,18 +35,13 @@ export async function POST(req) {
 
 export async function GET(req) {
   try {
-    const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
-
-    if (!userId) {
-      return NextResponse.json(
-        { message: "userId es requerido" },
-        { status: 400 },
-      );
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
     }
 
     const orders = await prisma.order.findMany({
-      where: { userId },
+      where: { userId: session.user.id },
       include: {
         orderItems: {
           include: {

@@ -12,7 +12,7 @@ export function useFavorites() {
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/favorites?userId=${userId}`);
+      const res = await fetch(`/api/favorites`);
       if (res.ok) {
         const data = await res.json();
         setFavorites(data);
@@ -34,7 +34,7 @@ export function useFavorites() {
       const res = await fetch("/api/favorites", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, productId: product.id }),
+        body: JSON.stringify({ productId: product.id }),
       });
 
       if (res.ok) {
@@ -52,7 +52,7 @@ export function useFavorites() {
     if (!userId) return;
 
     try {
-      await fetch(`/api/favorites?userId=${userId}&productId=${productId}`, {
+      await fetch(`/api/favorites?productId=${productId}`, {
         method: "DELETE",
       });
     } catch (error) {

@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
+import { useSession } from "next-auth/react";
 import Edit from "@/ui/icons/Edit";
 import { Mail, Phone, MapPin, Building2, House, X, Check } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -7,7 +8,8 @@ import BootCard from "@/components/BootCard";
 import ProfileCompleteModal from "@/components/ProfileCompleteModal";
 
 function ProfilePage() {
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
+  const { update: updateSession } = useSession();
   const [orders, setOrders] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -26,7 +28,7 @@ function ProfilePage() {
 
   useEffect(() => {
     if (user?.id) {
-      fetch(`/api/favorites?userId=${user.id}`)
+      fetch(`/api/favorites`)
         .then((res) => res.json())
         .then((data) => setFavorites(data));
     }
@@ -34,7 +36,7 @@ function ProfilePage() {
 
   useEffect(() => {
     if (user?.id) {
-      fetch(`/api/orders?userId=${user.id}`)
+      fetch(`/api/orders`)
         .then((res) => res.json())
         .then((data) => setOrders(data));
     }
@@ -46,8 +48,8 @@ function ProfilePage() {
     }
   }, [user]);
 
-  const handleUpdateProfile = (updatedUser) => {
-    setUser(updatedUser);
+  const handleUpdateProfile = async (updatedUser) => {
+    await updateSession();
   };
 
   const handleEditField = (field, currentValue) => {
@@ -65,7 +67,7 @@ function ProfilePage() {
 
       if (res.ok) {
         const updatedUser = await res.json();
-        setUser(updatedUser);
+        await updateSession();
       }
     } catch (error) {
       console.error("Error updating field:", error);
