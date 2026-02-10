@@ -48,7 +48,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -59,21 +59,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.zip = user.zip;
       }
 
-      // Cuando se llama update() refrescamos desde la BD
-      if (trigger === "update") {
-        const freshUser = await prisma.user.findUnique({
-          where: { id: token.id },
-        });
-        if (freshUser) {
-          token.name = freshUser.name;
-          token.email = freshUser.email;
-          token.role = freshUser.role;
-          token.phone = freshUser.phone;
-          token.address = freshUser.address;
-          token.city = freshUser.city;
-          token.state = freshUser.state;
-          token.zip = freshUser.zip;
-        }
+      // Cuando se llama update(data) refrescamos el token con los datos enviados
+      if (trigger === "update" && session) {
+        token.name = session.name ?? token.name;
+        token.email = session.email ?? token.email;
+        token.role = session.role ?? token.role;
+        token.phone = session.phone ?? token.phone;
+        token.address = session.address ?? token.address;
+        token.city = session.city ?? token.city;
+        token.state = session.state ?? token.state;
+        token.zip = session.zip ?? token.zip;
       }
 
       return token;

@@ -43,7 +43,7 @@ export default function Modal({ isOpen, onClose, children, className }) {
           >
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 z-[60] p-2 bg-black/40 hover:bg-red-500/20 rounded-full text-stone-400 hover:text-white backdrop-blur-md transition-all duration-300"
+              className="absolute top-4 cursor-pointer right-4 z-60 p-2 bg-black/40 hover:bg-red-500/20 rounded-full text-stone-400 hover:text-white backdrop-blur-md transition-all duration-300"
             >
               <X className="w-5 h-5" />
             </button>

@@ -48,7 +48,7 @@ export default async function CheckoutPage({ params }) {
               <div className="max-h-[300px] overflow-y-auto scrollbar-negro flex flex-col gap-6">
                 {order.orderItems.map((item) => (
                   <div key={item.id} className="flex gap-4 items-start">
-                    <div className="size-18 bg-gradient-to-br from-stone-200 to-stone-500 rounded-xl flex items-center justify-center shrink-0">
+                    <div className="size-18 bg-linear-to-br from-stone-200 to-stone-500 rounded-xl flex items-center justify-center shrink-0">
                       <img
                         src={item.product.imageUrl}
                         className="size-12 object-contain"

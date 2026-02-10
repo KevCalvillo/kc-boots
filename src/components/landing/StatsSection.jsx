@@ -12,7 +12,7 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="py-16 md:py-38 bg-gradient-to-b from-black via-stone-900 to-black">
+    <section className="py-16 md:py-38 bg-linear-to-b from-black via-stone-900 to-black">
       <motion.div
         initial="hidden"
         whileInView="visible"

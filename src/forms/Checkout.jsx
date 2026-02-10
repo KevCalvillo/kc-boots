@@ -15,8 +15,50 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
   const [shippingMethod, setShippingMethod] = useState("standard");
   const [step, setStep] = useState(1);
   const [clientSecret, setClientSecret] = useState(null);
+  const [useProfileAddress, setUseProfileAddress] = useState(false);
+  const [shipping, setShipping] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    country: "MX",
+    zipCode: "",
+    state: "",
+    municipality: "",
+    phone: "",
+  });
   const router = useRouter();
   const { user } = useAuth();
+
+  const handleShippingChange = (e) => {
+    setShipping({ ...shipping, [e.target.name]: e.target.value });
+  };
+
+  const handleUseProfileAddress = (checked) => {
+    setUseProfileAddress(checked);
+    if (checked && user) {
+      setShipping({
+        firstName: user.name?.split(" ")[0] || "",
+        lastName: user.name?.split(" ").slice(1).join(" ") || "",
+        address: user.address || "",
+        country: "MX",
+        zipCode: user.zip || "",
+        state: user.state || "",
+        municipality: user.city || "",
+        phone: user.phone || "",
+      });
+    } else {
+      setShipping({
+        firstName: "",
+        lastName: "",
+        address: "",
+        country: "MX",
+        zipCode: "",
+        state: "",
+        municipality: "",
+        phone: "",
+      });
+    }
+  };
 
   const shippingCost = shippingMethod === "express" ? 250 : 0;
   const finalTotal = subtotal + shippingCost;
@@ -65,6 +107,13 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
     const orderData = {
       orderId: orderId,
       total: finalTotal,
+      shippingName: `${shipping.firstName} ${shipping.lastName}`.trim(),
+      shippingAddress: shipping.address,
+      shippingCity: shipping.municipality,
+      shippingState: shipping.state,
+      shippingZip: shipping.zipCode,
+      shippingCountry: shipping.country,
+      shippingPhone: shipping.phone,
     };
     fetch("/api/checkout", {
       method: "POST",
@@ -204,9 +253,26 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
             <hr className="border-stone-800 my-4" />
 
             <div className="mt-4">
-              <h3 className="text-3xl font-rancho text-white mb-4">
-                Dirección de Envío
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-3xl font-rancho text-white">
+                  Dirección de Envío
+                </h3>
+                {user?.address && (
+                  <label className="flex items-center cursor-pointer group w-fit">
+                    <input
+                      type="checkbox"
+                      checked={useProfileAddress}
+                      onChange={(e) =>
+                        handleUseProfileAddress(e.target.checked)
+                      }
+                      className="mr-3 accent-primary size-4 cursor-pointer"
+                    />
+                    <span className="text-stone-400 text-sm group-hover:text-white transition-colors">
+                      Usar mi dirección de perfil
+                    </span>
+                  </label>
+                )}
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex flex-col">
@@ -216,6 +282,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="firstName"
                     type="text"
                     placeholder="Kevin"
+                    value={shipping.firstName}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>
@@ -227,6 +295,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="lastName"
                     type="text"
                     placeholder="Calvillo"
+                    value={shipping.lastName}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>
@@ -238,6 +308,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="address"
                     type="text"
                     placeholder="Av. Revolución 123, Col. Centro"
+                    value={shipping.address}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>
@@ -248,6 +320,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     <select
                       name="country"
                       required
+                      value={shipping.country}
+                      onChange={handleShippingChange}
                       className={`${inputStyle} appearance-none cursor-pointer`}
                     >
                       <option value="MX">México</option>
@@ -269,6 +343,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="zipCode"
                     type="text"
                     placeholder="37000"
+                    value={shipping.zipCode}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>
@@ -279,6 +355,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     <select
                       name="state"
                       required
+                      value={shipping.state}
+                      onChange={handleShippingChange}
                       className={`${inputStyle} appearance-none cursor-pointer`}
                     >
                       <option value="">Selecciona...</option>
@@ -286,6 +364,7 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                       <option value="Jal">Jalisco</option>
                       <option value="NL">Nuevo León</option>
                       <option value="CDMX">Ciudad de México</option>
+                      <option value="Ags">Aguascalientes</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-stone-400">
                       <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
@@ -302,6 +381,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="municipality"
                     type="text"
                     placeholder="León"
+                    value={shipping.municipality}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>
@@ -313,6 +394,8 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
                     name="phone"
                     type="tel"
                     placeholder="(477) 123 4567"
+                    value={shipping.phone}
+                    onChange={handleShippingChange}
                     className={inputStyle}
                   />
                 </div>

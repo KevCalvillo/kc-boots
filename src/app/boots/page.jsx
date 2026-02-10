@@ -57,7 +57,7 @@ function AllBoots() {
       <div className="relative h-[62vh] w-full flex items-center justify-center overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-black to-transparent z-10"></div>
         <div className="absolute inset-0 bg-[url('/bgBotas5.webp')] bg-cover bg-center "></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-[#050505]"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/20 to-[#050505]"></div>
 
         <div className="relative z-10 mr-auto ml-4 md:ml-10 lg:ml-30 text-left mt-10">
           <h1 className="text-7xl md:text-9xl text-white font-rancho drop-shadow-2xl">

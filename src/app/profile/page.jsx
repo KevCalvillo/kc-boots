@@ -2,10 +2,22 @@
 import { useAuth } from "@/context/AuthContext";
 import { useSession } from "next-auth/react";
 import Edit from "@/ui/icons/Edit";
-import { Mail, Phone, MapPin, Building2, House, X, Check } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Building2,
+  House,
+  X,
+  Check,
+  Package,
+  Calendar,
+  ShoppingBag,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import BootCard from "@/components/BootCard";
 import ProfileCompleteModal from "@/components/ProfileCompleteModal";
+import PurchaseDetailModal from "@/components/PurchaseDetailModal";
 
 function ProfilePage() {
   const { user } = useAuth();
@@ -15,6 +27,7 @@ function ProfilePage() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [editingField, setEditingField] = useState(null);
   const [editValue, setEditValue] = useState("");
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const isProfileIncomplete = (userData) => {
     return (
@@ -49,7 +62,9 @@ function ProfilePage() {
   }, [user]);
 
   const handleUpdateProfile = async (updatedUser) => {
-    await updateSession();
+    await updateSession({
+      ...updatedUser,
+    });
   };
 
   const handleEditField = (field, currentValue) => {
@@ -67,7 +82,9 @@ function ProfilePage() {
 
       if (res.ok) {
         const updatedUser = await res.json();
-        await updateSession();
+        await updateSession({
+          ...updatedUser,
+        });
       }
     } catch (error) {
       console.error("Error updating field:", error);
@@ -87,7 +104,7 @@ function ProfilePage() {
 
     return (
       <div className="flex items-center gap-4">
-        <Icon className="w-5 h-5 stroke-primary flex-shrink-0" />
+        <Icon className="w-5 h-5 stroke-primary shrink-0" />
         <span className="text-stone-400 min-w-[80px]">{label}:</span>
         {isEditing ? (
           <div className="flex items-center gap-2 flex-1">
@@ -186,7 +203,7 @@ function ProfilePage() {
                 </h2>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-4">
-                    <Mail className="w-5 h-5 stroke-primary flex-shrink-0" />
+                    <Mail className="w-5 h-5 stroke-primary shrink-0" />
                     <span className="text-stone-400 min-w-[80px]">Email:</span>
                     <span className="flex-1 text-white">{user.email}</span>
                   </div>
@@ -218,39 +235,79 @@ function ProfilePage() {
           </div>
           <div className="w-full lg:w-2/3 bg-[#121212] p-6 md:p-8 rounded-3xl border border-stone-800 shadow-2xl">
             <h2 className="font-rancho text-4xl mb-8 border-b border-stone-800 pb-4">
-              Tus Ordenes
+              Tus Compras
             </h2>
 
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[400px]">
-                <thead>
-                  <tr>
-                    <th className="text-left">Orden</th>
-                    <th className="text-left">Status</th>
-                    <th className="text-left">Total</th>
-                    <th className="text-left">Fecha</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.id}>
-                      <td className="text-left">{order.id}</td>
-                      <td className="text-left">{order.status}</td>
-                      <td className="text-left">${order.total}</td>
-                      <td className="text-left">{order.createdAt}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scrollbar-negro pr-1">
+              {orders.filter((o) => o.status === "paid").length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 text-stone-500">
+                  <ShoppingBag className="w-12 h-12 mb-4 stroke-stone-600" />
+                  <p className="text-lg">No tienes compras aún</p>
+                  <p className="text-sm text-stone-600 mt-1">
+                    Tus compras completadas aparecerán aquí
+                  </p>
+                </div>
+              ) : (
+                orders
+                  .filter((o) => o.status === "paid")
+                  .map((order) => (
+                    <button
+                      key={order.id}
+                      onClick={() => setSelectedOrder(order)}
+                      className="w-full flex items-center gap-4 bg-stone-900/50 hover:bg-stone-800/70 p-4 rounded-xl border border-stone-800 hover:border-primary/30 transition-all duration-300 cursor-pointer group text-left"
+                    >
+                      <div className="bg-primary/10 p-3 rounded-xl group-hover:bg-primary/20 transition-colors">
+                        <Package className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white font-bold text-sm truncate">
+                          Orden #{order.id}
+                        </p>
+                        <div className="flex items-center gap-3 text-stone-400 text-xs mt-1">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            {new Date(order.createdAt).toLocaleDateString(
+                              "es-MX",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              },
+                            )}
+                          </span>
+                          <span>
+                            {order.orderItems.length}{" "}
+                            {order.orderItems.length === 1
+                              ? "producto"
+                              : "productos"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-primary font-bold font-mono text-lg">
+                          ${Number(order.total).toLocaleString()}
+                        </p>
+                        <p className="text-xs text-green-500 mt-1">Pagado</p>
+                      </div>
+                    </button>
+                  ))
+              )}
             </div>
           </div>
+
+          <PurchaseDetailModal
+            isOpen={!!selectedOrder}
+            onClose={() => setSelectedOrder(null)}
+            order={selectedOrder}
+            user={user}
+          />
         </div>
 
         <div className="mt-12">
           <h2 className="font-rancho text-4xl mb-8 border-b border-stone-800 pb-4">
             Tus Favoritos
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {favorites.length === 0 ? (
               <p className="text-stone-400 text-sm">No tienes favoritos</p>
             ) : (

@@ -65,6 +65,13 @@ model Order{
   id String @id @default(uuid())
   total Decimal
   status String @default("pending")
+  shippingName    String?
+  shippingAddress String?
+  shippingCity    String?
+  shippingState   String?
+  shippingZip     String?
+  shippingCountry String?
+  shippingPhone   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

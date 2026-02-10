@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { auth } from "@/auth";
+import { prisma } from "@/libs/prisma";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -12,7 +13,31 @@ export async function POST(req) {
     }
 
     const body = await req.json();
-    const { orderId, total } = body;
+    const {
+      orderId,
+      total,
+      shippingName,
+      shippingAddress,
+      shippingCity,
+      shippingState,
+      shippingZip,
+      shippingCountry,
+      shippingPhone,
+    } = body;
+
+    // Save shipping address to the order
+    await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        shippingName,
+        shippingAddress,
+        shippingCity,
+        shippingState,
+        shippingZip,
+        shippingCountry,
+        shippingPhone,
+      },
+    });
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total * 100,

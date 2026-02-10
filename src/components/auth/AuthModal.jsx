@@ -44,7 +44,7 @@ export default function AuthModal({
             alt="Rancho KC Boots"
             className="w-full h-full object-cover brightness-[0.7]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-[#121212] via-transparent to-transparent"></div>
 
           <div className="absolute bottom-12 left-10 right-10 text-white z-10">
             <h3 className="text-5xl font-rancho mb-4 text-white">Familia KC</h3>
