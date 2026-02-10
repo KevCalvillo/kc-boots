@@ -63,7 +63,7 @@ export default async function CheckoutPage({ params }) {
                         Cant: {item.quantity}
                       </p>
                       <p className="text-stone-400 text-xs mt-1">
-                        Talla: 27 MX
+                        Talla: {item.size || "N/A"}
                       </p>
                     </div>
                     <div className="text-right font-mono font-bold text-lg text-stone-400 mr-2">

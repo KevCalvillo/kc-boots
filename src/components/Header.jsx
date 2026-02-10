@@ -83,12 +83,14 @@ export default function Header({
       >
         <div className="max-w-420 mx-auto flex items-center justify-between">
           {/* Botón hamburguesa - Solo móvil */}
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden text-white hover:text-primary transition-colors p-2"
-          >
-            <Menu size={28} />
-          </button>
+          <div className="flex-1 md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="text-white hover:text-primary transition-colors p-2"
+            >
+              <Menu size={28} />
+            </button>
+          </div>
 
           {/* Navegación Desktop */}
           <nav className="flex-1 hidden md:block">

@@ -28,13 +28,15 @@ export default function CartItem({ item, onDecrease, onIncrease, onRemove }) {
               {item.title}
             </h4>
             <button
-              onClick={() => onRemove(item.id)}
+              onClick={() => onRemove(item.cartKey)}
               className="text-stone-600 hover:text-red-500 transition-colors p-1"
             >
               <Trash2 className="w-5 h-5" />
             </button>
           </div>
-          <p className="text-sm text-stone-500 mt-1">Talla: 27 MX</p>{" "}
+          {item.size && (
+            <p className="text-sm text-stone-500 mt-1">Talla: {item.size} MX</p>
+          )}
           {/* Ejemplo estático */}
         </div>
 
@@ -42,7 +44,7 @@ export default function CartItem({ item, onDecrease, onIncrease, onRemove }) {
           {/* CONTROL DE CANTIDAD */}
           <div className="flex items-center gap-3 bg-stone-900 rounded-lg p-1 border border-stone-800">
             <button
-              onClick={() => onDecrease(item.id)}
+              onClick={() => onDecrease(item.cartKey)}
               className="w-7 h-7 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 rounded-md transition-all"
             >
               <Minus className="w-4 h-4" />

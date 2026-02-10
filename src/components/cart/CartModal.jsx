@@ -27,6 +27,7 @@ export default function CartModal({
         productId: item.id,
         price: item.price,
         quantity: item.quantity,
+        size: item.size || null,
       })),
     };
 
@@ -97,7 +98,7 @@ export default function CartModal({
               <AnimatePresence mode="popLayout">
                 {cart.map((item) => (
                   <CartItem
-                    key={item.id}
+                    key={item.cartKey}
                     item={item}
                     onDecrease={onDecrease}
                     onIncrease={onIncrease}

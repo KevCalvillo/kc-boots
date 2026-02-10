@@ -17,7 +17,7 @@ export default function CartTable({ cart, onDecrease, onIncrease, onRemove }) {
         <AnimatePresence mode="popLayout">
           {cart.map((item, index) => (
             <CartItem
-              key={item.id}
+              key={item.cartKey || item.id}
               item={item}
               onDecrease={onDecrease}
               onIncrease={onIncrease}

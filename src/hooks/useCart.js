@@ -30,13 +30,15 @@ export function useCart() {
     });
   };
 
-  const addToCart = (product, showAlert) => {
+  const addToCart = (product, showAlert, size = null) => {
+    const cartKey = size ? `${product.id}-${size}` : product.id;
+
     setCart((prevCart) => {
-      const existe = prevCart.find((item) => item.id === product.id);
+      const existe = prevCart.find((item) => item.cartKey === cartKey);
 
       if (existe) {
         return prevCart.map((item) =>
-          item.id === product.id
+          item.cartKey === cartKey
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
@@ -44,25 +46,25 @@ export function useCart() {
         if (showAlert) {
           addToCartAlert(product.title);
         }
-        return [...prevCart, { ...product, quantity: 1 }];
+        return [...prevCart, { ...product, quantity: 1, size, cartKey }];
       }
     });
   };
 
-  const removeFromCart = (id) => {
-    const itemToRemove = cart.find((item) => item.id === id);
+  const removeFromCart = (cartKey) => {
+    const itemToRemove = cart.find((item) => item.cartKey === cartKey);
     setDeletedItem(itemToRemove);
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    setCart((prevCart) => prevCart.filter((item) => item.cartKey !== cartKey));
 
     setTimeout(() => {
       setDeletedItem(null);
     }, 5000);
   };
 
-  const decreaseQuantity = (id) => {
+  const decreaseQuantity = (cartKey) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id && item.quantity > 1
+        item.cartKey === cartKey && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item,
       ),
@@ -71,7 +73,7 @@ export function useCart() {
 
   const undoRemove = () => {
     if (deletedItem) {
-      addToCart(deletedItem, false);
+      addToCart(deletedItem, false, deletedItem.size);
       setDeletedItem(null);
     }
   };
@@ -106,6 +108,6 @@ export function useCart() {
     getCartItemCount,
     emptyCartAlert,
     addToCartAlert,
-    cleanCart
+    cleanCart,
   };
 }
