@@ -58,7 +58,7 @@ export default function AuthModal({
         {/* LADO DERECHO: FORMULARIO (55% del ancho) */}
         <div className="w-full md:w-[55%] bg-[#121212] flex flex-col relative">
           {/* Scroll container para el formulario */}
-          <div className="flex-1 overflow-y-scroll scrollbar-hide p-4 md:p-16 pt-8 md:pt-16">
+          <div className="flex-1 p-4 md:p-16 pt-4 md:pt-16">
             <motion.div
               key={showRegisterForm ? "register" : "login"}
               initial={{ opacity: 0, x: 20 }}

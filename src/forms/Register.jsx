@@ -91,7 +91,7 @@ export default function RegisterForm({ onClose, setShowRegisterForm }) {
   const labelStyle = "text-[10px] md:text-xs text-stone-500 ml-1 block mb-1";
 
   return (
-    <div className="font-roboto md:mt-4">
+    <div className="font-roboto">
       <div className="text-center mb-4 md:mb-6">
         <h1 className="text-white text-3xl md:text-5xl font-rancho mb-2">
           Crea una cuenta
