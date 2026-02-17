@@ -106,7 +106,7 @@ export default function CheckoutForm({ orderId, subtotal, orderUserId }) {
   function handleButtonClick() {
     const orderData = {
       orderId: orderId,
-      total: finalTotal,
+      shippingMethod: shippingMethod,
       shippingName: `${shipping.firstName} ${shipping.lastName}`.trim(),
       shippingAddress: shipping.address,
       shippingCity: shipping.municipality,

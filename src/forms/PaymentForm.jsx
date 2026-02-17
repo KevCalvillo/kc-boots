@@ -54,12 +54,7 @@ export default function PaymentForm({ total, onSuccess, orderId }) {
       await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: user.email,
-          orderId: orderId,
-          cart: cart,
-          total: total,
-        }),
+        body: JSON.stringify({ orderId }),
       });
 
       onSuccess(3);

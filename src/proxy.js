@@ -7,7 +7,7 @@ export default auth((req) => {
     if (!req.auth) {
       return NextResponse.redirect(new URL("/", req.url));
     }
-    if (req.auth.role !== "ADMIN") {
+    if (req.auth.user?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }

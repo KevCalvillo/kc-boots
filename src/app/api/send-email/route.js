@@ -1,12 +1,43 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { prisma } from "@/libs/prisma";
+import { auth } from "@/auth";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 401 });
+    }
+
     const body = await req.json();
-    const { email, orderId, cart, total } = body;
+    const { orderId } = body;
+
+    // Obtener datos de la orden desde la DB
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: {
+        orderItems: { include: { product: true } },
+        user: true,
+      },
+    });
+
+    if (!order) {
+      return NextResponse.json(
+        { error: "Orden no encontrada" },
+        { status: 404 },
+      );
+    }
+
+    // Verificar que la orden pertenece al usuario
+    if (order.userId !== session.user.id) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 403 });
+    }
+
+    const email = order.user.email;
+    const total = Number(order.total);
 
     const { data, error } = await resend.emails.send({
       from: "KC Boots <onboarding@resend.dev>",
@@ -30,15 +61,15 @@ export async function POST(req) {
           
           <h2 style="color: #ffffff; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Productos</h2>
           
-          ${cart
+          ${order.orderItems
             .map(
               (item) => `
             <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #333;">
               <div>
-                <p style="color: #ffffff; margin: 0; font-weight: bold;">${item.title}</p>
+                <p style="color: #ffffff; margin: 0; font-weight: bold;">${item.product.title}</p>
                 <p style="color: #9ca3af; margin: 5px 0 0 0; font-size: 14px;">Cantidad: ${item.quantity}</p>
               </div>
-              <p style="color: #a18046; font-weight: bold; margin: 0;">$${(item.price * item.quantity).toLocaleString()}</p>
+              <p style="color: #a18046; font-weight: bold; margin: 0;">$${(Number(item.price) * item.quantity).toLocaleString()}</p>
             </div>
           `,
             )

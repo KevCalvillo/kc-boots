@@ -2,9 +2,10 @@
 import Header from "./Header";
 import AuthModal from "./auth/AuthModal";
 import CartModal from "./cart/CartModal";
-import DeletedItemNotification from "./cart/DeletedItem"
+import DeletedItemNotification from "./cart/DeletedItem";
 import { useAuth } from "@/context/AuthContext";
 import Footer from "./Footer";
+import { usePathname } from "next/navigation";
 
 export default function NavbarLayout({ children }) {
   const {
@@ -23,36 +24,46 @@ export default function NavbarLayout({ children }) {
     undoRemove,
   } = useAuth();
 
-  return (
-    <>
-      <Header
-        setModalOpen={setModalOpen}
-        setShowRegisterForm={setShowRegisterForm}
-        setCartModalOpen={setCartModalOpen}
-      />
+  const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/admin");
 
-      {children}
+  if (isAdmin) {
+    return <>{children}</>;
+  } else {
+    return (
+      <>
+        <Header
+          setModalOpen={setModalOpen}
+          setShowRegisterForm={setShowRegisterForm}
+          setCartModalOpen={setCartModalOpen}
+        />
 
-      <Footer/>
+        {children}
 
-      <AuthModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        showRegisterForm={showRegisterForm}
-        setShowRegisterForm={setShowRegisterForm}
-      />
+        <Footer />
 
-      <CartModal
-        isOpen={cartModalOpen}
-        onClose={() => setCartModalOpen(false)}
-        cart={cart}
-        onDecrease={decreaseQuantity}
-        onIncrease={addToCart}
-        onRemove={removeFromCart}
-        onCancel={cancelCart}
-      />
+        <AuthModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          showRegisterForm={showRegisterForm}
+          setShowRegisterForm={setShowRegisterForm}
+        />
 
-      <DeletedItemNotification deletedItem={deletedItem} onUndo={undoRemove} />
-    </>
-  );
+        <CartModal
+          isOpen={cartModalOpen}
+          onClose={() => setCartModalOpen(false)}
+          cart={cart}
+          onDecrease={decreaseQuantity}
+          onIncrease={addToCart}
+          onRemove={removeFromCart}
+          onCancel={cancelCart}
+        />
+
+        <DeletedItemNotification
+          deletedItem={deletedItem}
+          onUndo={undoRemove}
+        />
+      </>
+    );
+  }
 }

@@ -21,10 +21,8 @@ export default function CartModal({
 
   const handleCreateOrder = () => {
     const orderData = {
-      total: total,
       orderItems: cart.map((item) => ({
         productId: item.id,
-        price: item.price,
         quantity: item.quantity,
         size: item.size || null,
       })),
@@ -60,7 +58,6 @@ export default function CartModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="w-full font-roboto p-4 md:p-10">
-        {/* HEADER DEL MODAL */}
         <div className="flex items-center justify-between mb-8 border-b border-stone-800 pb-4">
           <h2 className="text-2xl md:text-4xl text-white font-rancho flex items-center gap-2 md:gap-3">
             <ShoppingBag className="w-8 h-8 text-primary" />
@@ -92,7 +89,6 @@ export default function CartModal({
           </motion.div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* LISTA DE PRODUCTOS (SCROLLABLE) */}
             <div className="flex-1 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
               <AnimatePresence mode="popLayout">
                 {cart.map((item) => (
@@ -107,7 +103,6 @@ export default function CartModal({
               </AnimatePresence>
             </div>
 
-            {/* RESUMEN DE COMPRA (PANEL DERECHO) */}
             <div className="w-full lg:w-80 bg-stone-900/50 p-6 rounded-2xl border border-stone-800 h-fit">
               <h3 className="text-xl text-white font-bold mb-6">Resumen</h3>
 

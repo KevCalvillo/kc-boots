@@ -1,9 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 export function useCart() {
   const [cart, setCart] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(()=>{
+    const cartStorage = localStorage.getItem('cart')
+    if(cartStorage){
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCart(JSON.parse(cartStorage))
+    }
+    setIsLoaded(true)
+  },[])
+
+  useEffect(()=>{
+    if(isLoaded){
+      localStorage.setItem('cart', JSON.stringify(cart))
+    }
+  },[cart,isLoaded])
   const [deletedItem, setDeletedItem] = useState(null);
 
   const emptyCartAlert = () => {

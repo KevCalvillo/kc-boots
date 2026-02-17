@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import EyeOpen from "../ui/icons/EyeOpen";
 import EyeClosed from "../ui/icons/EyeClosed";
@@ -8,6 +9,7 @@ import Google from "../ui/icons/Google";
 
 export default function LoginForm({ onClose, setShowRegisterForm }) {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -31,16 +33,33 @@ export default function LoginForm({ onClose, setShowRegisterForm }) {
         color: "#ffffff",
       });
     } else {
-      Swal.fire({
-        title: "¡Bienvenido!",
-        text: "Nos alegra verte de nuevo",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-        background: "#1d1d1de8",
-        color: "#ffffff",
-      });
-      onClose();
+      // Obtener la sesión actualizada para verificar el rol
+      const session = await getSession();
+
+      if (session?.user?.role === "ADMIN") {
+        Swal.fire({
+          title: "¡Bienvenido, Admin!",
+          text: "Redirigiendo al panel de administración",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#1d1d1de8",
+          color: "#ffffff",
+        });
+        onClose();
+        router.push("/admin");
+      } else {
+        Swal.fire({
+          title: "¡Bienvenido!",
+          text: "Nos alegra verte de nuevo",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "#1d1d1de8",
+          color: "#ffffff",
+        });
+        onClose();
+      }
     }
   }
   const inputStyle =
